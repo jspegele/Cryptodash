@@ -23,3 +23,15 @@ h1 {
   margin: 0 0 1.6rem 0;
   padding: 0;
 }
+
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

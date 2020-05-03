@@ -2,7 +2,7 @@
   margin-bottom: 60px;
 }
 
-.index-header {
+.index__header {
   background-color: $blue-grey800;
   border: .1rem solid $blue-grey900;
   color: $blue-grey200;
@@ -12,4 +12,16 @@
   grid-gap: 1.2rem;
   grid-template-columns: 50px 1fr 100px 100px 100px 70px;
   padding: 1.8rem;
+}
+
+.index__notification {
+  align-items: center;
+  color: $blue-grey200;
+  display: flex;
+  font-size: 2rem;
+  padding: 1.8rem;
+  
+  svg {
+    margin-left: 2rem;
+  }
 }
