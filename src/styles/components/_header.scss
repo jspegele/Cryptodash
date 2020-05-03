@@ -1,0 +1,28 @@
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.header__title {
+  font-size: 3.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  color: $on-surface;
+  margin-left: 40px;
+  padding-bottom: .6rem;
+  text-decoration: none;
+  transition: color .2s;
+
+  &:hover {
+    color: $blue100;
+  }
+}
+
+.nav__link--active {
+  border-bottom: .2rem solid $blue500;
+}

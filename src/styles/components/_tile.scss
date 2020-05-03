@@ -1,0 +1,47 @@
+.coin-tile {
+  @extend .index-header;
+  border-top: none;
+  color: $on-surface;
+  font-size: 2rem;
+
+  > * {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.coin-tile__order {
+  justify-content: center;
+}
+
+.coin-tile__name {
+  overflow: hidden;
+  img {
+    width: 2.2rem;
+    margin-right: 2rem;
+  }
+  .coin-tile__symbol {
+    color: $blue-grey200;
+    display: inline-block;
+    margin-left: 2rem;
+  }
+}
+
+.coin-tile__price {
+  justify-content: space-between;
+}
+
+.coin-tile__change {
+  justify-content: flex-end;
+}
+
+.coin-tile__cap {
+  justify-content: flex-end;
+}
+
+.coin-tile__favorite {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

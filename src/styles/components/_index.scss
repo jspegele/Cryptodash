@@ -1,0 +1,11 @@
+.index-header {
+  background-color: $blue-grey800;
+  border: .1rem solid $blue-grey900;
+  color: $blue-grey200;
+  display: grid;
+  font-size: 1.4rem;
+  font-weight: 400;
+  grid-gap: 1.2rem;
+  grid-template-columns: 50px 1fr 100px 100px 100px 70px;
+  padding: 1.8rem;
+}
