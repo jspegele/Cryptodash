@@ -3,6 +3,12 @@
   border-top: none;
   color: $on-surface;
   font-size: 2rem;
+  text-decoration: none;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: $blue500;
+  }
 
   > * {
     align-items: center;
