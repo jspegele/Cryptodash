@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
-import AppRouter from '../routers/AppRouter'
-import CoinsContext from '../context/coins-context'
 import coinsReducer from '../reducers/coins'
+
+
 const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
 
@@ -80,11 +80,9 @@ const App = () => {
   }, [])
 
   return (
-    <CoinsContext.Provider value={{ coins, dispatch }}>
       <div className="wrapper">
         <AppRouter />
       </div>
-    </CoinsContext.Provider>
   )
 }
 

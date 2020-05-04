@@ -1,20 +1,19 @@
-
-$blue-grey900: #263238;
-$blue-grey800: #37474F;
-$blue-grey700: #455A64;
-$blue-grey600: #546E7A;
-$blue-grey500: #607D8B;
-$blue-grey400: #78909C;
-$blue-grey300: #90A4AE;
-$blue-grey200: #B0BEC5;
-$blue-grey100: #CFD8DC;
-$blue-grey50: #ECEFF1;
+$surface: #121212;
+$surface1: lighten($surface, 5%);
+$surface2: lighten($surface, 8%);
+$surface3: lighten($surface, 11%);
+$surface4: lighten($surface, 14%);
+$surface6: lighten($surface, 18%);
+$surface8: lighten($surface, 25%);
+$surface12: lighten($surface, 32%);
+$surface16: lighten($surface, 40%);
+$surface24: lighten($surface, 50%);
+$surface48: lighten($surface, 75%);
 
 $on-surface: #fff;
-$blue500: #0f4c75;
-$blue300: #3282b8;
-$blue200: lighten($blue300, 20%);
-$blue100: lighten($blue300, 40%);
-$off-white: #bbe1fa;
-$purple: #6A3DDD;
-$yellow: #E6CF55;
+$on-primary: #000;
+
+$primary: #bb86fc;
+$primary-variant: #3700b3;
+$secondary: #03dac6;
+$error: #cf6679;

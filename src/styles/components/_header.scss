@@ -19,10 +19,10 @@
   transition: color .2s;
 
   &:hover {
-    color: $blue100;
+    color: lighten($primary, 14%);
   }
 }
 
 .nav__link--active {
-  border-bottom: .2rem solid $blue500;
+  border-bottom: .2rem solid $primary;
 }

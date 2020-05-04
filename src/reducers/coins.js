@@ -1,6 +1,6 @@
-const coinsReducer = (state, action) => {
+const coinsReducer = (state = [], action) => {
   switch (action.type) {
-    case 'POPULATE_COINS':
+    case 'SET_COINS':
       return action.coins
     case 'ADD_COIN':
       return [

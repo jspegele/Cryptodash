@@ -2,6 +2,7 @@ import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import Header from '../components/Header'
+import DashboardPage from '../components/DashboardPage'
 import CoinIndexPage from '../components/CoinIndexPage'
 import SettingsPage from '../components/SettingsPage'
 import CoinPage from '../components/CoinPage'
@@ -12,9 +13,10 @@ const AppRouter = () => (
   <Router history={history}>
     <Header />
     <Switch>
-      <Route path="/" component={CoinIndexPage} exact={true} />
+      <Route path="/" component={DashboardPage} exact={true} />
+      <Route path="/coins" component={CoinIndexPage} />
       <Route path="/settings" component={SettingsPage} />
-      <Route path="/coin/:id" component={CoinPage} />
+      <Route path="/coin/:symbol" component={CoinPage} />
     </Switch>
   </Router>
 );

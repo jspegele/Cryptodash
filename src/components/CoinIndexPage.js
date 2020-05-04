@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { FaCircleNotch } from 'react-icons/fa'
-import CoinsContext from '../context/coins-context'
 import CoinTile from './CoinTile'
 
 class DashboardPage extends React.Component {
@@ -46,18 +45,18 @@ class DashboardPage extends React.Component {
           <div className="text-right">Market Cap</div>
           <div className="text-center">Favorite</div>
         </div>
-        <CoinsContext.Consumer>
+        <div>
           {({ coins }) => (
             coins.length > 0 ? (
               coins.slice(0, (this.state.nextCoinIndex + this.state.sliceSize - 1)).map((coin, index) => (
-                <CoinTile key={coin.symbol} index={index} coin={coin} />
+                <CoinTile key={coin.symbol} type={'full'} index={index} coin={coin} />
               ))
             ) : (
-              <div className="index__notification">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
+              <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
             )
           )}
-        </CoinsContext.Consumer>
-        {this.state.loading && <div className="index__notification">Fetching more coins<FaCircleNotch size="2.4rem" className="fa-spin" /></div>}
+        </div>
+        {this.state.loading && <div className="loading__notificaton">Fetching more coins<FaCircleNotch size="2.4rem" className="fa-spin" /></div>}
       </div>
     )
   }

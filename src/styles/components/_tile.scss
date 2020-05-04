@@ -2,12 +2,13 @@
   @extend .index__header;
   border-top: none;
   color: $on-surface;
+  cursor: pointer;
   font-size: 2rem;
   text-decoration: none;
   transition: background-color .2s;
 
   &:hover {
-    background-color: $blue500;
+    background-color: $surface3;
   }
 
   > * {
@@ -28,9 +29,10 @@
     margin-right: 2rem;
   }
   .coin-tile__symbol {
-    color: $blue-grey200;
+    color: $surface24;
     display: inline-block;
-    margin-left: 2rem;
+    font-weight: 300;
+    margin-left: 2.4rem;
   }
 }
 
@@ -50,4 +52,105 @@
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+.fave-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: .1rem;
+  margin-bottom: 40px;
+}
+
+.fave-list--more {
+  grid-template-columns: 1fr;
+}
+
+.fave-tile {
+  @extend .coin-tile;
+  align-items: center;
+  display: flex;
+  font-weight: 400;
+  justify-content: space-between;
+  outline: none;
+  padding: 1.2rem;
+
+  .fave-tile__name {
+    @extend .coin-tile__name;
+    display: flex;
+  
+    img, svg {
+      width: 3.2rem;
+      margin-right: 4rem;
+    }
+  
+    .fave-tile__symbol {
+      @extend .coin-tile__symbol;
+    }
+  }
+  
+  .fave-tile__favorite {
+    font-size: 1.8rem;
+  
+    svg {
+      margin-right: 1rem;
+      margin-bottom: .1rem;
+    }
+  }
+
+  &:hover {
+    background-color: $surface3;
+    color: $on-surface;
+  }
+}
+
+.fave-tile--remove {
+  
+  .fave-tile__favorite {
+    visibility: visible;
+  }
+
+  &:hover {
+    background-color: $error;
+    color: $on-primary;
+
+    .fave-tile__name {
+
+      .fave-tile__symbol {
+        color: $surface12;
+      }
+    }
+  }
+}
+
+.fave-tile--add {
+  
+  .fave-tile__favorite {
+    visibility: visible;
+  }
+
+  &:hover {
+    background-color: $secondary;
+    color: $on-primary;
+
+    .fave-tile__name {
+
+      .fave-tile__symbol {
+        color: $surface12;
+      }
+    }
+  }
+}
+
+.fave-tile--disabled {
+  pointer-events: none;
+  opacity: 0.4;
+
+  .fave-tile__favorite {
+    visibility: hidden;
+  }
+  
+  &:hover {
+    background-color: $surface1;
+    color: $on-primary;
+  }
 }

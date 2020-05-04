@@ -1,0 +1,11 @@
+.loading__notificaton {
+  align-items: center;
+  color: $surface16;
+  display: flex;
+  font-size: 2rem;
+  padding: 1.8rem;
+  
+  svg {
+    margin-left: 2rem;
+  }
+}
