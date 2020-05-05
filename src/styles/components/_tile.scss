@@ -1,3 +1,10 @@
+.coin-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: .1rem;
+  margin-bottom: 40px;
+}
+
 .coin-tile {
   @extend .table-header;
   border-top: none;
@@ -37,7 +44,7 @@
 }
 
 .coin-tile__price {
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .coin-tile__change {

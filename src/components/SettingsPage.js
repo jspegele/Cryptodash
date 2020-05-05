@@ -29,7 +29,9 @@ export class SettingsPage extends React.Component {
     cc.priceFull(symbol, [currency]).then(price => {
       this.props.editCoin(symbol, {
         price: price[symbol][currency].PRICE,
-        changeDay: price[symbol][currency].CHANGEDAY
+        changeDay: price[symbol][currency].CHANGEDAY,
+        changePctDay: price[symbol][currency].CHANGEPCTDAY,
+        mktCap: price[symbol][currency].MKTCAP
       })
     }).catch(console.error)
   }

@@ -48,7 +48,9 @@ export class DashboardPage extends React.Component {
           // const coin = this.props.coins.find(({ symbol }) => symbol === i)
           self.props.editCoin(i, {
             price: prices[i][currency].PRICE,
-            changeDay: prices[i][currency].CHANGEDAY
+            changeDay: prices[i][currency].CHANGEDAY,
+            changePctDay: prices[i][currency].CHANGEPCTDAY,
+            mktCap: prices[i][currency].MKTCAP
           })
           self.props.updatePriceInfo({
             faves: true,

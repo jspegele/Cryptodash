@@ -1,44 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { FaCircleNotch } from 'react-icons/fa'
+import selectCoins from '../selectors/coins'
+import { editCoin } from '../actions/coins'
+import { setTextFilter } from '../actions/filters'
 import CoinTile from './CoinTile'
+import Scroller from './Scroller'
 
-class DashboardPage extends React.Component {
+class CoinIndexPage extends React.Component {
   state ={
     sliceSize: 50,
     nextCoinIndex: 0,
     loading: false
   }
-  componentDidMount = () => {
-    document.addEventListener('scroll', this.trackScrolling);
-  }
-  componentDidUpdate = () => {
-    document.addEventListener('scroll', this.trackScrolling);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('scroll', this.trackScrolling);
-  }
-  isBottom(el) {
-    return el.getBoundingClientRect().bottom <= window.innerHeight;
-  }
-  trackScrolling = () => {
-    const wrappedElement = document.getElementById('coin-list');
-    if (this.isBottom(wrappedElement)) {
-      this.setState(() => ({ loading: true }))
-      document.removeEventListener('scroll', this.trackScrolling);
-      const self = this;
-      setTimeout(function() {
-        self.setState(() => ({
-          nextCoinIndex: self.state.nextCoinIndex + self.state.sliceSize,
-          loading: false
-        }))
-      }, 2000);
-    }
-  }
   render() {
     return (
       <div className="content-container">
         <div id="coin-list" className="index">
-          <div className="index__header">
+          <div className="table-header">
             <div className="text-center">#</div>
             <div>Coin</div>
             <div className="text-right">Price</div>
@@ -46,22 +25,38 @@ class DashboardPage extends React.Component {
             <div className="text-right">Market Cap</div>
             <div className="text-center">Favorite</div>
           </div>
-          <div>
-            {({ coins }) => (
-              coins.length > 0 ? (
-                coins.slice(0, (this.state.nextCoinIndex + this.state.sliceSize - 1)).map((coin, index) => (
-                  <CoinTile key={coin.symbol} type={'full'} index={index} coin={coin} />
-                ))
-              ) : (
-                <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
-              )
-            )}
-          </div>
-          {this.state.loading && <div className="loading__notificaton">Fetching more coins<FaCircleNotch size="2.4rem" className="fa-spin" /></div>}
+          {this.props.coins.length === 0 ? (
+            <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
+          ) : (this.props.visibleCoins && this.props.visibleCoins.length) > 0 ? (
+            <>
+              <Scroller sliceSize="25" >
+                {
+                this.props.visibleCoins
+                  .map((coin, i) => (
+                    <CoinTile key={coin.symbol} type={'full'} index={i} coin={coin} />
+                  ))
+                }
+              </Scroller>
+            </>
+          ) : (
+            <div className="loading__notificaton">No coins found</div>
+          )}
         </div>
       </div>
     )
   }
 }
 
-export default DashboardPage;
+const mapStateToProps = (state) => ({
+  coins: state.coins,
+  visibleCoins: selectCoins(state.coins, state.filters),
+  favorites: state.favorites,
+  filters: state.filters
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  editCoin: (symbol, updates) => dispatch(editCoin(symbol, updates)),
+  setTextFilter: (text) => dispatch(setTextFilter(text))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoinIndexPage)
