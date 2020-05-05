@@ -2,7 +2,18 @@
   margin-bottom: 60px;
 }
 
-.index__header {
+.index-header {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .6rem;
+
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
+.table-header {
   background-color: $surface1;
   border: .1rem solid $surface;
   color: $surface24;

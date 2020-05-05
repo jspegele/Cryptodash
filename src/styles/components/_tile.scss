@@ -1,5 +1,5 @@
 .coin-tile {
-  @extend .index__header;
+  @extend .table-header;
   border-top: none;
   color: $on-surface;
   cursor: pointer;
@@ -160,7 +160,7 @@
   }
 
   &:hover {
-    background-color: $secondary;
+    background-color: $positive;
     color: $on-primary;
 
     .fave-tile__name {

@@ -4,7 +4,7 @@ import moment from 'moment'
 import { FaCircleNotch, FaBitcoin, FaSync } from 'react-icons/fa'
 import { setCoins, editCoin } from '../actions/coins'
 import { setFavorites } from '../actions/favorites'
-import { updateFavePriceInfo } from '../actions/price-info'
+import { updatePriceInfo } from '../actions/price-info'
 import { history } from '../routers/AppRouter'
 
 const cc = require('cryptocompare')
@@ -28,22 +28,34 @@ export class DashboardPage extends React.Component {
   componentDidUpdate = () => {
     if(!this.props.priceInfo.faves) {
       this.handleUpdatePrices()
-      this.props.updateFavePriceInfo(moment().valueOf())
     }
   }
   handleUpdatePrices = () => {
+    this.updatePrices()
+    this.props.updatePriceInfo({
+      faves: true,
+      favesLastUpdated: moment().valueOf()
+    })
+  }
+  updatePrices = () => {
     const currency = 'USD';
     const favoriteSymbols = this.props.coins.filter(coin => this.props.favorites.includes(coin.symbol)).map(coin => coin.symbol)
     document.getElementById('refresh-prices-icon').classList.add('fa-spin')
-    cc.priceMulti(favoriteSymbols, [currency]).then(prices => {
+    cc.priceFull(favoriteSymbols, [currency]).then(prices => {
       Object.keys(prices).forEach(i => {
         const self = this
         setTimeout(function() {
           // const coin = this.props.coins.find(({ symbol }) => symbol === i)
-          self.props.editCoin(i, { price: prices[i][currency] })
-          self.props.updateFavePriceInfo(moment().valueOf())
+          self.props.editCoin(i, {
+            price: prices[i][currency].PRICE,
+            changeDay: prices[i][currency].CHANGEDAY
+          })
+          self.props.updatePriceInfo({
+            faves: true,
+            favesLastUpdated: moment().valueOf()
+          })
           document.getElementById('refresh-prices-icon').classList.remove('fa-spin')
-        }, 1000);
+        }, 500);
       })
     }).catch(console.error)
   }
@@ -61,7 +73,7 @@ export class DashboardPage extends React.Component {
           <button
             type="button"
             className="updater__button"
-            onClick={this.handleUpdatePrices}
+            onClick={this.updatePrices}
           >
             <FaSync size="1rem" id="refresh-prices-icon" />Refresh Prices
           </button>
@@ -80,8 +92,17 @@ export class DashboardPage extends React.Component {
                   <span className="fave-tile__symbol">{coin.symbol}</span>
                 </div>
                 <div className="fave-tile__favorite">
-                  {coin.price && '$'}
-                  {coin.price ? (coin.price >= .01 ? coin.price.toFixed(2) : coin.price) : 'no data'}
+                  {coin.price ? (
+                    coin.changeDay > 0 ? (
+                      <span className="green-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                    ) : (
+                      coin.changeDay < 0 ? (
+                        <span className="red-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                      ) : (
+                        <span>${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                      )
+                    )
+                  ) : 'refresh'}
                 </div>
               </a>
               )
@@ -105,7 +126,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   setCoins: (coins) => dispatch(setCoins(coins)),
   editCoin: (symbol, updates) => dispatch(editCoin(symbol, updates)),
   setFavorites: (favorites) => dispatch(setFavorites(favorites)),
-  updateFavePriceInfo: (lastUpdated) => dispatch(updateFavePriceInfo(lastUpdated))
+  updatePriceInfo: (lastUpdated) => dispatch(updatePriceInfo(lastUpdated))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage)

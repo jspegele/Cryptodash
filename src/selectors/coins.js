@@ -1,6 +1,7 @@
 const selectCoins = (coins, { text, sortBy }) => {
+  const exactMatches = []
   return coins.filter((coin) => {
-    const textMatch = coin.symbol.toLowerCase().includes(text.toLowerCase()) || coin.name.includes(text.toLowerCase())
+    const textMatch = coin.symbol.toLowerCase().includes(text.toLowerCase()) || coin.name.toLowerCase().includes(text.toLowerCase())
     return textMatch
   }).sort((a, b) => {
     if(sortBy === 'order') {
@@ -13,6 +14,7 @@ const selectCoins = (coins, { text, sortBy }) => {
       return b.price - a.price
     }
   })
+
 }
 
 export default selectCoins

@@ -3,7 +3,7 @@ export const setPriceInfo = (priceInfo) => ({
   priceInfo
 })
 
-export const updateFavePriceInfo = (lastUpdated) => ({
-  type: 'UPDATE_FAVE_PRICE_INFO',
-  lastUpdated
+export const updatePriceInfo = (updates) => ({
+  type: 'UPDATE_PRICE_INFO',
+  updates
 })

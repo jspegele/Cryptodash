@@ -9,3 +9,11 @@
 .text-right {
   text-align: right;
 }
+
+.green-text {
+  color: $positive;
+}
+
+.red-text {
+  color: $error;
+}

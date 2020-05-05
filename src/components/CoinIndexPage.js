@@ -31,7 +31,7 @@ class DashboardPage extends React.Component {
           nextCoinIndex: self.state.nextCoinIndex + self.state.sliceSize,
           loading: false
         }))
-      }, 500);
+      }, 2000);
     }
   }
   render() {

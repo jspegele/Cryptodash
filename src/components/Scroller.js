@@ -25,15 +25,17 @@ class Scroller extends React.Component {
   trackScrolling = () => {
     const wrappedElement = document.getElementById('scroller');
     if (this.isBottom(wrappedElement)) {
-      this.setState(() => ({ loading: true }))
+      if (this.state.currentSlice < this.props.children.length) {
+        this.setState(() => ({ loading: true }))
+        const self = this;
+        setTimeout(function() {
+          self.setState(() => ({
+            currentSlice: parseInt(self.state.currentSlice) + parseInt(self.props.sliceSize),
+            loading: false
+          }))
+        }, 100)
+      }
       document.removeEventListener('scroll', this.trackScrolling);
-      const self = this;
-      setTimeout(function() {
-        self.setState(() => ({
-          currentSlice: parseInt(self.state.currentSlice) + parseInt(self.props.sliceSize),
-          loading: false
-        }))
-      }, 500);
     }
   }
   render() {

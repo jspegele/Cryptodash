@@ -9,11 +9,10 @@ const priceInfoReducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'SET_PRICE_INFO':
       return action.priceInfo
-    case 'UPDATE_FAVE_PRICE_INFO':
+    case 'UPDATE_PRICE_INFO':
       return {
         ...state,
-        faves: true,
-        favesLastUpdated: action.lastUpdated
+        ...action.updates
       }
     default:
       return state
