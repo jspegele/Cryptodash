@@ -32,22 +32,24 @@ const CoinPage = (props) => {
         const filterResults = coins.filter((coin) => coin.symbol === props.match.params.symbol)
         const coin = filterResults[0]
         return (
-          <div className="coin">
-            <div className="coin__header">
-              <h1 className="coin__title">{coin.name}<span className="coin__symbol">({coin.symbol})</span></h1>
-              <div className="coin__price"><span className="coin__currency">$</span>{coin.price.toFixed(2)}</div>
-              <button type="button" className="coin__favorite" onClick="onFavorite"><FaRegStar size="2rem" />Add to Favorites</button>
-            </div>
-            <div className="coin__wrapper">
-              <div className="coin__main">
-                <CoinChart coin={coin}></CoinChart>
-                <div className="coin__details">
-                  <div>{coin.price}</div>
-                  <div>{coin.mktCap}</div>
-                </div>
+          <div className="content-container">
+            <div className="coin">
+              <div className="coin__header">
+                <h1 className="coin__title">{coin.name}<span className="coin__symbol">({coin.symbol})</span></h1>
+                <div className="coin__price"><span className="coin__currency">$</span>{coin.price.toFixed(2)}</div>
+                <button type="button" className="coin__favorite" onClick="onFavorite"><FaRegStar size="2rem" />Add to Favorites</button>
               </div>
-              <div className="coin__aside">
-                <h3>{coin.name} News</h3>
+              <div className="coin__wrapper">
+                <div className="coin__main">
+                  <CoinChart coin={coin}></CoinChart>
+                  <div className="coin__details">
+                    <div>{coin.price}</div>
+                    <div>{coin.mktCap}</div>
+                  </div>
+                </div>
+                <div className="coin__aside">
+                  <h3>{coin.name} News</h3>
+                </div>
               </div>
             </div>
           </div>

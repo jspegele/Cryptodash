@@ -10,7 +10,7 @@ const FavoriteCoins = (props) => (
           <FavoriteTile key={coin.symbol} coin={coin} clickEvent={props.clickEvent} tileType={props.tileType} />
         )
       ) : (
-        <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
+        <div className="loading__notificaton">No coins selected</div>
       )}
     </div>
   </div>

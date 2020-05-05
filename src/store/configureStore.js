@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import coinsReducer from '../reducers/coins'
 import filtersReducer from '../reducers/filters'
 import favoritesReducer from '../reducers/favorites'
+import priceInfoReducer from '../reducers/price-info'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -13,7 +14,8 @@ export default () => {
     combineReducers({
       coins: coinsReducer,
       filters: filtersReducer,
-      favorites: favoritesReducer
+      favorites: favoritesReducer,
+      priceInfo: priceInfoReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
   )

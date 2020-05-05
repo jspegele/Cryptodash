@@ -33,7 +33,7 @@ class Scroller extends React.Component {
           currentSlice: parseInt(self.state.currentSlice) + parseInt(self.props.sliceSize),
           loading: false
         }))
-      }, 1000);
+      }, 500);
     }
   }
   render() {

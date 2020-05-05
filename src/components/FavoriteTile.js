@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaBitcoin, FaPlus, FaMinus, FaAngleDoubleRight } from 'react-icons/fa'
+import { FaBitcoin, FaPlus, FaTrash, FaAngleDoubleRight } from 'react-icons/fa'
 
 const FavoriteTile = (props) => {
   let altText = ''
@@ -30,7 +30,7 @@ const FavoriteTile = (props) => {
         <span className="fave-tile__symbol">{props.coin.symbol}</span>
       </div>
       {props.tileType === 'favorite' ? (
-        <div className="fave-tile__favorite"><FaMinus size="2rem" /></div>
+        <div className="fave-tile__favorite"><FaTrash size="2rem" /></div>
       ) : (
         props.tileType === 'more' ? (
           <div className="fave-tile__favorite"><FaPlus size="2rem" /></div>

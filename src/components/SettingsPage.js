@@ -2,10 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { FaCircleNotch } from 'react-icons/fa'
 import selectCoins from '../selectors/coins'
+import { editCoin } from '../actions/coins'
 import { addFavorite, removeFavorite } from '../actions/favorites'
 import FavoriteCoins from './FavoriteCoins'
 import FavoriteTile from './FavoriteTile'
 import Scroller from './Scroller'
+
+const cc = require('cryptocompare')
+cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
 
 export class SettingsPage extends React.Component {
   componentDidUpdate = () => {
@@ -14,9 +18,17 @@ export class SettingsPage extends React.Component {
   }
   handleAddFavorite = (e) => {
     this.props.addFavorite(e.target.id)
+    this.fetchPrice(e.target.id)
   }
   handleRemoveFavorite = (e) => {
     this.props.removeFavorite(e.target.id)
+  }
+  fetchPrice = (symbol) => {
+    const currency = 'USD';
+    cc.price(symbol, [currency]).then(price => {
+      console.log(price[currency])
+      this.props.editCoin(symbol, { price: price[currency] })
+    }).catch(console.error)
   }
   render() {
     const favoriteCoins = this.props.coins.filter(coin => this.props.favorites.includes(coin.symbol))
@@ -25,7 +37,7 @@ export class SettingsPage extends React.Component {
       tileType = 'disabled'
     }
     return (
-      <div>
+      <div className="content-container">
         {this.firstVisit ? (
           <h1>Hello. Pick your favorite coins to populate your dashboard.</h1>
         ) : (
@@ -60,7 +72,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addFavorite: (favorite) => dispatch(addFavorite(favorite)),
-  removeFavorite: (favorite) => dispatch(removeFavorite(favorite))
+  removeFavorite: (favorite) => dispatch(removeFavorite(favorite)),
+  editCoin: (symbol, updates) => dispatch(editCoin(symbol, updates))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)

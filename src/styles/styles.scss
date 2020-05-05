@@ -1,11 +1,13 @@
 @import './base/settings';
 @import './base/base';
 @import './base/modifiers';
+@import './components/content-container';
 @import './components/wrapper';
 @import './components/header';
 @import './components/index';
+@import './components/settings';
+@import './components/dashboard';
 @import './components/tile';
 @import './components/coin';
 @import './components/chart';
 @import './components/scroller';
-@import './components/settings';

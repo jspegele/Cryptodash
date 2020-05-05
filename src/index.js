@@ -10,6 +10,12 @@ import './styles/styles.scss'
 
 const store = configureStore()
 
+// populate favorites list
+const favorites = JSON.parse(localStorage.getItem('cryptodashFavorites'))
+if(favorites) {
+  store.dispatch(setFavorites(favorites))
+}
+
 // populate coin list
 const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
@@ -34,19 +40,10 @@ cc.coinList().then((coinList) => {
   // })
 }).catch(console.error)
 
-
-// populate favorites list
-const favorites = JSON.parse(localStorage.getItem('cryptodashFavorites'))
-if(favorites) {
-  store.dispatch(setFavorites(favorites))
-}
-
 const jsx = (
   <React.StrictMode>
     <Provider store={store}>
-      <div className="wrapper">
-        <AppRouter />
-      </div>
+      <AppRouter />
     </Provider>
   </React.StrictMode>
 )

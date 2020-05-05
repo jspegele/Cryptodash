@@ -11,8 +11,8 @@ const coinsReducer = (state = [], action) => {
       return state.map((coin) => {
         if(coin.symbol === action.symbol) {
           return {
-            ...coin, // spread out original expense
-            ...action.updates  // spread out updates and override existing vals
+            ...coin,
+            ...action.updates
           }
         } else {
           return coin;

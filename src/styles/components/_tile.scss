@@ -80,11 +80,12 @@
   
     img, svg {
       width: 3.2rem;
-      margin-right: 4rem;
+      margin-right: 2rem;
     }
   
     .fave-tile__symbol {
       @extend .coin-tile__symbol;
+      margin-left: 1.8rem;
     }
   }
   
@@ -101,12 +102,27 @@
     background-color: $surface3;
     color: $on-surface;
   }
+
+  > * {
+    pointer-events: none;
+  }
 }
 
 .fave-tile--remove {
+
+  .fave-tile__name {
+  
+    img, svg {
+      margin-right: 4rem;
+    }
+  
+    .fave-tile__symbol {
+      margin-left: 2.4rem;
+    }
+  }
   
   .fave-tile__favorite {
-    visibility: visible;
+    visibility: hidden;
   }
 
   &:hover {
@@ -119,10 +135,25 @@
         color: $surface12;
       }
     }
+
+    .fave-tile__favorite {
+      visibility: visible;
+    }
   }
 }
 
 .fave-tile--add {
+
+  .fave-tile__name {
+  
+    img, svg {
+      margin-right: 4rem;
+    }
+  
+    .fave-tile__symbol {
+      margin-left: 2.4rem;
+    }
+  }
   
   .fave-tile__favorite {
     visibility: visible;
