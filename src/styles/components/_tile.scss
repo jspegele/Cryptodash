@@ -100,10 +100,11 @@
     font-size: 1.8rem;
   
     svg {
-      margin-right: 1rem;
-      margin-bottom: .1rem;
+      margin: 0 1rem .1rem 0;
+      padding-top: .3rem;
     }
   }
+
 
   &:hover {
     background-color: $surface3;

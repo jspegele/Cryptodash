@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { FaCircleNotch, FaBitcoin, FaSync } from 'react-icons/fa'
+import { FaCircleNotch, FaBitcoin, FaSync, FaCaretUp, FaCaretDown, FaCaretLeft } from 'react-icons/fa'
 import { setCoins, editCoin } from '../actions/coins'
 import { setFavorites } from '../actions/favorites'
 import { updatePriceInfo } from '../actions/price-info'
@@ -96,12 +96,12 @@ export class DashboardPage extends React.Component {
                 <div className="fave-tile__favorite">
                   {coin.price ? (
                     coin.changeDay > 0 ? (
-                      <span className="green-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                      <span className="green-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretUp size="1.6rem" /></span>
                     ) : (
                       coin.changeDay < 0 ? (
-                        <span className="red-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                        <span className="red-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretDown size="1.6rem" /></span>
                       ) : (
-                        <span>${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}</span>
+                        <span>${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretLeft size="1.6rem" /></span>
                       )
                     )
                   ) : 'refresh'}

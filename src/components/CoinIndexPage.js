@@ -8,14 +8,16 @@ import CoinTile from './CoinTile'
 import Scroller from './Scroller'
 
 class CoinIndexPage extends React.Component {
-  state ={
-    sliceSize: 50,
-    nextCoinIndex: 0,
-    loading: false
+  handleTextChange = (e) => {
+    this.props.setTextFilter(e.target.value)
   }
   render() {
     return (
       <div className="content-container">
+        <div className="index-header">
+          <div></div>
+          <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
+        </div>
         <div id="coin-list" className="index">
           <div className="table-header">
             <div className="text-center">#</div>
