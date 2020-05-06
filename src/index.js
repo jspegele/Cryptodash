@@ -29,7 +29,10 @@ cc.coinList().then((coinList) => {
       'name': coinList.Data[coinKeys[i]].CoinName,
       'sortOrder': coinList.Data[coinKeys[i]].SortOrder,
       'imageUrl': coinList.Data[coinKeys[i]].ImageUrl,
-      'isTrading': coinList.Data[coinKeys[i]].IsTrading
+      'isTrading': coinList.Data[coinKeys[i]].IsTrading,
+      "price": 0,
+      "changePctDay": 0,
+      "mktCap": 0
     }
     coins.push(coin)
   }

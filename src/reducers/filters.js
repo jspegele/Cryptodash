@@ -15,20 +15,45 @@ export default (state = filtersReducerDefaultState, action) => {
         ...state,
         sortBy: 'order'
       }
-    case 'SORT_BY_NAME':
+    case 'SORT_BY_NAME_ASC':
       return {
         ...state,
-        sortBy: 'name'
+        sortBy: 'nameAsc'
       }
-    case 'SORT_BY_MKT_CAP':
+    case 'SORT_BY_NAME_DESC':
       return {
         ...state,
-        sortBy: 'mktcap'
+        sortBy: 'nameDesc'
       }
-    case 'SET_START_Price':
+    case 'SORT_BY_MKT_CAP_ASC':
       return {
         ...state,
-        sortBy: 'price'
+        sortBy: 'mktcapAsc'
+      }
+    case 'SORT_BY_MKT_CAP_DESC':
+      return {
+        ...state,
+        sortBy: 'mktcapDesc'
+      }
+    case 'SORT_BY_PRICE_ASC':
+      return {
+        ...state,
+        sortBy: 'priceAsc'
+      }
+    case 'SORT_BY_PRICE_DESC':
+      return {
+        ...state,
+        sortBy: 'priceDesc'
+      }
+    case 'SORT_BY_CHANGE_ASC':
+      return {
+        ...state,
+        sortBy: 'changeAsc'
+      }
+    case 'SORT_BY_CHANGE_DESC':
+      return {
+        ...state,
+        sortBy: 'changeDesc'
       }
     default:
       return state;

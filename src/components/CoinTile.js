@@ -36,7 +36,6 @@ const CoinTile = (props) => {
       </div>
       <div className="coin-tile__change">{props.coin.changePctDay && <span>{props.coin.changePctDay.toFixed(2)}%</span>}</div>
       <div className="coin-tile__cap">{props.coin.mktCap && <span>{(props.coin.mktCap / 1000000000).toFixed(1)}B</span>}</div>
-      <div className="coin-tile__favorite"><FaRegStar size="2.2rem" /></div>
     </Link>
   )
 }

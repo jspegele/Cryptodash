@@ -7,14 +7,34 @@ export const sortByOrder = () => ({
   type: 'SORT_BY_ORDER'
 })
 
-export const sortByName = () => ({
-  type: 'SORT_BY_NAME'
+export const sortByNameAsc = () => ({
+  type: 'SORT_BY_NAME_ASC'
 })
 
-export const sortByMktCap = () => ({
-  type: 'SORT_BY_MKT_CAP'
+export const sortByNameDesc= () => ({
+  type: 'SORT_BY_NAME_DESC'
 })
 
-export const sortByPrice = () => ({
-  type: 'SORT_BY_PRICE'
+export const sortByMktCapAsc = () => ({
+  type: 'SORT_BY_MKT_CAP_ASC'
+})
+
+export const sortByMktCapDesc = () => ({
+  type: 'SORT_BY_MKT_CAP_DESC'
+})
+
+export const sortByPriceAsc = () => ({
+  type: 'SORT_BY_PRICE_ASC'
+})
+
+export const sortByPriceDesc = () => ({
+  type: 'SORT_BY_PRICE_DESC'
+})
+
+export const sortByChangeAsc = () => ({
+  type: 'SORT_BY_CHANGE_ASC'
+})
+
+export const sortByChangeDesc = () => ({
+  type: 'SORT_BY_CHANGE_DESC'
 })
