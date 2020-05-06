@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { FaCircleNotch, FaCaretUp, FaCaretDown, FaCaretRight } from 'react-icons/fa'
+import moment from 'moment'
+import { FaCircleNotch, FaCaretDown, FaCaretUp, FaCaretRight, FaSync } from 'react-icons/fa'
 import selectCoins from '../selectors/coins'
-import { editCoin } from '../actions/coins'
+import { setCoins } from '../actions/coins'
+import { updatePriceInfo } from '../actions/price-info'
 import {
   setTextFilter,
   sortByNameAsc,
@@ -17,9 +19,82 @@ import {
 import CoinTile from './CoinTile'
 import Scroller from './Scroller'
 
+const cc = require('cryptocompare')
+cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
+
 class CoinIndexPage extends React.Component {
   state = {
     sort: ''
+  }
+  componentDidMount = () => {
+    if(!this.props.priceInfo.all) {
+      this.fetchCoins()
+    }
+  }
+  componentDidUpdate = () => {
+    if(!this.props.priceInfo.all) {
+      this.fetchCoins()
+    }
+  }
+  updatePrices = () => {
+    document.getElementById('refresh-prices-icon').classList.add('fa-spin')
+    this.fetchCoins()
+  }
+  fetchCoins = () => {
+    const coins = this.props.coins
+    const coinKeys = []
+    for(let i = 0; i < coins.length; i++) {
+      coinKeys.push(coins[i].symbol)
+    }
+    this.fetchPrices([], [], [...coinKeys], [...coins], 200, 'USD')
+  }
+  fetchPrices = (processedKeys, processedCoins, remainingKeys, remainingData, spliceSize, currency) => {
+    const keysSplice = remainingKeys.splice(0,spliceSize)
+    const dataSplice = remainingData.splice(0,spliceSize)
+    
+    cc.priceFull(keysSplice, [currency]).then((prices) => {
+      for(let i = 0; i < keysSplice.length; i++) {
+        let price = null, changeDay = null, changePctDay = null, mktCap = null, imgUrl = null;
+        if(prices[keysSplice[i]]) {
+          price = prices[keysSplice[i]][currency].PRICE
+          changeDay = prices[keysSplice[i]][currency].CHANGEDAY
+          changePctDay = prices[keysSplice[i]][currency].CHANGEPCTDAY
+          mktCap = prices[keysSplice[i]][currency].MKTCAP
+        } else {
+          price = 0
+          changeDay = 0
+          changePctDay = 0
+          mktCap = 0
+        }
+        dataSplice[i] = {
+          ...dataSplice[i],
+          price,
+          changeDay,
+          changePctDay,
+          mktCap,
+          imgUrl
+        }
+      }
+      processedKeys = processedKeys.concat(keysSplice)
+      processedCoins = processedCoins.concat(dataSplice)
+      if(remainingData.length > 0) {
+        this.fetchPrices(processedKeys, processedCoins, remainingKeys, remainingData, spliceSize, currency)
+      } else {
+        this.props.setCoins(processedCoins)
+        this.props.sortByMktCapDesc()
+        this.props.updatePriceInfo({
+          all: true,
+          allLastUpdated: moment().valueOf()
+        })
+        this.setState(() => ({
+          pricesLoaded: true,
+          sort: 'mktCapDesc'
+        }))
+        document.getElementById('refresh-prices-icon').classList.remove('fa-spin')
+        return
+      }
+        
+    }).catch(console.error)
   }
   handleTextChange = (e) => {
     this.props.setTextFilter(e.target.value)
@@ -27,48 +102,62 @@ class CoinIndexPage extends React.Component {
   handleNameSort = () => {
     if(this.state.sort === 'nameAsc') {
       this.props.sortByNameDesc()
-      this.setState(() => ({ sort: 'nameDesc'}))
+      this.setState(() => ({ sort: 'nameDesc' }))
     } else {
       this.props.sortByNameAsc()
-      this.setState(() => ({ sort: 'nameAsc'}))
+      this.setState(() => ({ sort: 'nameAsc' }))
     }
   }
   handlePriceSort = () => {
-    if(this.state.sort === 'priceAsc') {
-      this.props.sortByPriceDesc()
-      this.setState(() => ({ sort: 'priceDesc'}))
-    } else {
+    if(this.state.sort === 'priceDesc') {
       this.props.sortByPriceAsc()
-      this.setState(() => ({ sort: 'priceAsc'}))
+      this.setState(() => ({ sort: 'priceAsc' }))
+    } else {
+      this.props.sortByPriceDesc()
+      this.setState(() => ({ sort: 'priceDesc' }))
     }
   }
   handleChangeSort = () => {
-    if(this.state.sort === 'changeAsc') {
-      this.props.sortByChangeDesc()
-      this.setState(() => ({ sort: 'changeDesc'}))
-    } else {
+    if(this.state.sort === 'changeDesc') {
       this.props.sortByChangeAsc()
-      this.setState(() => ({ sort: 'changeAsc'}))
+      this.setState(() => ({ sort: 'changeAsc' }))
+    } else {
+      this.props.sortByChangeDesc()
+      this.setState(() => ({ sort: 'changeDesc' }))
     }
   }
   handleMktCapSort = () => {
-    if(this.state.sort === 'mktCapAsc') {
-      this.props.sortByMktCapDesc()
-      this.setState(() => ({ sort: 'mktCapDesc'}))
-    } else {
+    if(this.state.sort === 'mktCapDesc') {
       this.props.sortByMktCapAsc()
-      this.setState(() => ({ sort: 'mktCapAsc'}))
+      this.setState(() => ({ sort: 'mktCapAsc' }))
+    } else {
+      this.props.sortByMktCapDesc()
+      this.setState(() => ({ sort: 'mktCapDesc' }))
     }
   }
   render() {
     return (
       <div className="content-container">
         <div className="index-header">
-          <div></div>
           <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
+          <div className="updater">
+            <div className="updater__last-updated">
+              Last Updated:
+              <span className="updater__time">
+                {this.props.priceInfo.allLastUpdated && moment(this.props.priceInfo.allLastUpdated).format('HH:mm')}
+              </span>
+            </div>
+            <button
+              type="button"
+              className="updater__button"
+              onClick={this.updatePrices}
+            >
+              <FaSync size="1rem" id="refresh-prices-icon" />Refresh Prices
+            </button>
+          </div>
         </div>
         <div id="coin-list" className="index">
-          <div className="table-header">
+          <div className="table-header show-for-desktop">
             <div className="text-center">#</div>
             <div className="table_header__sort" onClick={this.handleNameSort}>
               {this.state.sort === 'nameAsc' ? (
@@ -119,7 +208,7 @@ class CoinIndexPage extends React.Component {
               Market Cap
             </div>
           </div>
-          {this.props.coins.length === 0 ? (
+          {(this.props.coins.length === 0 || !this.props.priceInfo.all) ? (
             <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
           ) : (this.props.visibleCoins && this.props.visibleCoins.length) > 0 ? (
             <>
@@ -145,11 +234,13 @@ const mapStateToProps = (state) => ({
   coins: state.coins,
   visibleCoins: selectCoins(state.coins, state.filters),
   favorites: state.favorites,
-  filters: state.filters
+  filters: state.filters,
+  priceInfo: state.priceInfo
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  editCoin: (symbol, updates) => dispatch(editCoin(symbol, updates)),
+  setCoins: (coins) => dispatch(setCoins(coins)),
+  updatePriceInfo: (lastUpdated) => dispatch(updatePriceInfo(lastUpdated)),
   setTextFilter: (text) => dispatch(setTextFilter(text)),
   sortByNameAsc: (text) => dispatch(sortByNameAsc()),
   sortByNameDesc: (text) => dispatch(sortByNameDesc()),
@@ -162,10 +253,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinIndexPage)
-
-
-
-
-
-
-

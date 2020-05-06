@@ -3,13 +3,19 @@
 }
 
 .index-header {
-  align-items: flex-end;
+  align-items: flex-start;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: .6rem;
 
   h2 {
     margin-bottom: 0;
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    align-items: flex-end;
+    flex-direction: row;
   }
 }
 
@@ -17,12 +23,15 @@
   background-color: $surface1;
   border: .1rem solid $surface;
   color: $surface24;
-  display: grid;
   font-size: 1.4rem;
   font-weight: 400;
-  grid-gap: 1.2rem;
-  grid-template-columns: 50px 1fr 100px 100px 100px;
   padding: 1.8rem;
+
+  @media (min-width: $desktop-breakpoint) {
+    display: grid;
+    grid-gap: 1.2rem;
+    grid-template-columns: 50px 1fr 100px 125px 100px;
+  }
 }
 
 .table_header__sort {

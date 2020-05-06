@@ -3,58 +3,116 @@
   flex-direction: column;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 4rem 2rem;
+  grid-template-areas: "header favorite" "chart aside";
+}
+
 .coin__header {
+  grid-area: header;
   align-items: center;
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 40px;;
+  margin-bottom: 40px;
+}
+
+.coin__info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.coin__logo {
+  img {
+    margin-right: 3rem;
+    width: 6.4rem;
+  }
 }
 
 .coin__title {
   align-items: center;
   display: flex;
-  font-size: 3.2rem;
-  font-weight: 600;
-  margin: 0;
-  padding: 0;
 
-  span.coin__symbol {
+  h1 {
+    font-size: 3.6rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+  }
+
+  .coin__symbol {
     color: $surface16;
-    display: inline-block;
-    font-size: 1.8rem;
-    margin-left: 20px;
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 300;
+    margin: 0 0 0 2rem;
   }
 }
 
 .coin__price {
-  font-size: 3.2rem;
-  font-weight: 600;
-  margin-left: 10rem;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 3.6rem;
+  font-weight: 500;
+  margin-left: 3rem;
+}
 
-  span.coin__currency {
-    font-size: 2.8rem;
-    font-weight: 300;
-  }
+.coin__change {
+  font-size: 3.6rem;
+  font-weight: 400;
+  margin-left: 1.6rem;
 }
 
 .coin__favorite {
-  margin-left: auto;
-}
-
-.coin__wrapper {
+  grid-area: favorite;
   align-items: flex-start;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.coin__main {
+.add-favorite {
+  align-items: center;
+  background: none;
+  border: 1px solid $on-surface;
+  color: $on-surface;
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  outline: none;
+  padding: 1.6rem;
+  width: 100%;
+
+  &:hover {
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  &:active {
+    background-color: darken($primary, 4%);
+    border-color: $primary;
+    -webkit-box-shadow: inset 0px 0px .5rem $surface6;
+       -moz-box-shadow: inset 0px 0px .5rem $surface6;
+            box-shadow: inset 0px 0px .5rem $surface6;
+  }
+  
+  svg {
+    margin: 0 1.2rem .3rem 0;
+  }
+}
+
+.coin__chart {
+  grid-area: chart;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
 }
 
-.coin__chart {
+.coin__figure {
   margin-bottom: 40px;
 }
 
@@ -64,6 +122,4 @@
   justify-content: space-between;
 }
 
-.coin__aside {
-
-}
+.coin__aside { grid-area: aside; }

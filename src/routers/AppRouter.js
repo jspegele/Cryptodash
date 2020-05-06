@@ -15,8 +15,8 @@ const AppRouter = () => (
     <Switch>
       <Route path="/" component={DashboardPage} exact={true} />
       <Route path="/coins" component={CoinIndexPage} />
-      <Route path="/settings" component={SettingsPage} />
       <Route path="/coin/:symbol" component={CoinPage} />
+      <Route path="/settings" component={SettingsPage} />
     </Switch>
   </Router>
 );

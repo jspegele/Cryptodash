@@ -20,22 +20,24 @@ const FavoriteTile = (props) => {
 
   return (
     <button type="button" className={faveClassName} id={props.coin.symbol} onClick={props.clickEvent} title={altText}>
-      <div className="fave-tile__name">
-        {props.coin.imageUrl ? (
-          <img src={`http://cryptocompare.com/${props.coin.imageUrl}`} alt="coin logo" />
+      <div className="fave-tile__overview">
+        <div className="fave-tile__logo">
+          {props.coin.imageUrl ? (
+            <img src={`http://cryptocompare.com/${props.coin.imageUrl}`} alt="coin logo" />
           ) : (
             <FaBitcoin size="3.2rem" />
           )}
-        {props.coin.name}
+        </div>
+        <span className="fave-tile__name">{props.coin.name}</span>
         <span className="fave-tile__symbol">{props.coin.symbol}</span>
       </div>
       {props.tileType === 'favorite' ? (
-        <div className="fave-tile__favorite"><FaTrash size="2rem" /></div>
+        <div className="fave-tile__price"><FaTrash size="2rem" /></div>
       ) : (
         props.tileType === 'more' ? (
-          <div className="fave-tile__favorite"><FaPlus size="2rem" /></div>
+          <div className="fave-tile__price"><FaPlus size="2rem" /></div>
         ) : (
-          <div className="fave-tile__favorite"><FaAngleDoubleRight size="2rem" /></div>
+          <div className="fave-tile__price"><FaAngleDoubleRight size="2rem" /></div>
         )
       )}
     </button>

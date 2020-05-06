@@ -13,23 +13,28 @@ export default {
     '#1B2839'
   ],
   chart: {
-    backgroundColor: lightTheme ? 'white' : '#061a44',
+    backgroundColor: lightTheme ? 'white' : '#1f1f1f',
     borderColor: '#000000',
     borderWidth: 0,
     className: 'dark-container',
-    plotBackgroundColor: lightTheme ? 'white' : '#061a44',
-    plotBorderWidth: 0
+    plotBackgroundColor: lightTheme ? 'white' : '#1f1f1f',
+    plotBorderWidth: 0,
+    spacingTop: 40,
+    spacingRight: 40,
+    spacingBottom: 40,
+    spacingLeft: 40
   },
   title: {
     style: {
-      color: '#C0C0C0',
-      font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+      color: '#fff',
+      font: 'bold 24px "Roboto", sans-serif',
+      margin: '20px'
     }
   },
   subtitle: {
     style: {
-      color: '#666666',
-      font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+      color: '#fff',
+      font: 'bold 18px "Roboto", sans-serif'
     }
   },
   xAxis: {
@@ -46,8 +51,8 @@ export default {
       style: {
         color: '#CCC',
         fontWeight: 'bold',
-        fontSize: '12px',
-        fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+        fontSize: '18px',
+        fontFamily: '"Roboto", sans-serif'
 
       }
     }
@@ -68,8 +73,8 @@ export default {
       style: {
         color: '#CCC',
         fontWeight: 'bold',
-        fontSize: '12px',
-        fontFamily: 'Trebuchet MS, Verdana, sans-serif'
+        fontSize: '18px',
+        fontFamily: '"Roboto", sans-serif'
       }
     }
   },
@@ -109,7 +114,7 @@ export default {
   },
   legend: {
     itemStyle: {
-      font: '9pt Trebuchet MS, Verdana, sans-serif',
+      font: '"Roboto", sans-serif',
       color: '#A0A0A0'
     },
     itemHoverStyle: {

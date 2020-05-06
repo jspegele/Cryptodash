@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import moment from 'moment'
 import { FaCircleNotch, FaBitcoin, FaSync, FaCaretUp, FaCaretDown, FaCaretLeft } from 'react-icons/fa'
 import { setCoins, editCoin } from '../actions/coins'
@@ -45,7 +46,6 @@ export class DashboardPage extends React.Component {
       Object.keys(prices).forEach(i => {
         const self = this
         setTimeout(function() {
-          // const coin = this.props.coins.find(({ symbol }) => symbol === i)
           self.props.editCoin(i, {
             price: prices[i][currency].PRICE,
             changeDay: prices[i][currency].CHANGEDAY,
@@ -57,7 +57,7 @@ export class DashboardPage extends React.Component {
             favesLastUpdated: moment().valueOf()
           })
           document.getElementById('refresh-prices-icon').classList.remove('fa-spin')
-        }, 500);
+        }, 300);
       })
     }).catch(console.error)
   }
@@ -83,30 +83,32 @@ export class DashboardPage extends React.Component {
         <div className="fave-list">
           {favoriteCoins.length > 0 ? (
             favoriteCoins.map(coin => (
-              <a className='fave-tile' key={coin.symbol} id={coin.symbol} title='View coin details' href={"/coin/"+coin.symbol}>
-                <div className="fave-tile__name">
-                  {coin.imageUrl ? (
-                    <img src={`http://cryptocompare.com/${coin.imageUrl}`} alt="coin logo" />
-                    ) : (
-                      <FaBitcoin size="3.2rem" />
+              <Link to={"/coin/"+coin.symbol} className='fave-tile' key={coin.symbol} id={coin.symbol} title='View coin details'>
+                <div className="fave-tile__overview">
+                  <div className="fave-tile__logo">
+                    {coin.imageUrl ? (
+                      <img src={`http://cryptocompare.com/${coin.imageUrl}`} alt="coin logo" />
+                      ) : (
+                        <FaBitcoin size="3.2rem" />
                     )}
-                  {coin.name}
+                  </div>
+                  <span className="fave-tile__name">{coin.name}</span>
                   <span className="fave-tile__symbol">{coin.symbol}</span>
                 </div>
-                <div className="fave-tile__favorite">
+                <div className="fave-tile__price">
                   {coin.price ? (
                     coin.changeDay > 0 ? (
-                      <span className="green-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretUp size="1.6rem" /></span>
+                      <span className="green-text"><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretUp size="1.6rem" /></span>
                     ) : (
                       coin.changeDay < 0 ? (
-                        <span className="red-text">${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretDown size="1.6rem" /></span>
+                        <span className="red-text"><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretDown size="1.6rem" /></span>
                       ) : (
-                        <span>${coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretLeft size="1.6rem" /></span>
+                        <span><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretLeft size="1.6rem" /></span>
                       )
                     )
-                  ) : 'refresh'}
+                  ) : 'no data'}
                 </div>
-              </a>
+              </Link>
               )
             )
           ) : (

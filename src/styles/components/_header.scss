@@ -1,9 +1,53 @@
 .header {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
+  height: auto;
   justify-content: space-between;
   margin-bottom: 30px;
   padding: 1.6rem 0;
+  width: 100%;
+}
+
+.mobile-menu {
+    svg {
+    margin-top: 1rem;
+  }
+}
+
+.nav {
+  background: $primary;
+  border-top: .2rem solid $primary;
+  left: 0;
+  margin-top: 2rem;
+  max-height: 1000px;
+  overflow: hidden;
+  position: absolute;
+  top: 7.4rem;
+  transition:  max-height 1s;
+  width: 100%;
+  z-index: 1000;
+
+  @media (min-width: $desktop-breakpoint) {
+    background: none;
+    border: none;
+    height: 3.4rem;
+    left: auto;
+    margin-top: 0;
+    position: static;
+    top: auto;
+    width: auto;
+    z-index: 1;
+  }
+}
+
+.nav-hidden {
+  max-height: 0px;
+  transition: max-height .3s;
+
+  @media (min-width: $desktop-breakpoint) {
+    max-height: 1000px;
+  }
 }
 
 .header__title {
@@ -14,15 +58,30 @@
 }
 
 .nav__link {
+  border-bottom: .2rem solid $primary;
   color: $on-surface;
-  font-size: 1.8rem;
-  margin-left: 40px;
-  padding-bottom: .6rem;
+  display: block;
+  font-size: 2rem;
+  padding: 1rem 2rem;
   text-decoration: none;
   transition: color .2s;
+  width: 100%;
 
   &:hover {
     color: lighten($primary, 14%);
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    border: none;
+    display: inline;
+    font-size: 1.8rem;
+    margin-left: 3rem;
+    padding: 0 0 .6rem 0;
+    width: auto;
+  }
+
+  @media (min-width: $large-screen-breakpoint) {
+    margin-left: 4rem;
   }
 }
 

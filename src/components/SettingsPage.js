@@ -56,8 +56,8 @@ export class SettingsPage extends React.Component {
           </>
         )}
         <div className="index-header">
-          <h2>Add up to 12 favorites</h2>
           <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
+          <h2>Add up to 12 favorites</h2>
         </div>
         {this.props.coins.length === 0 ? (
           <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>

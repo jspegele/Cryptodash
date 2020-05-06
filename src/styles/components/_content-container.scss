@@ -1,5 +1,9 @@
 .content-container {
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 1.6rem;
   max-width: 120rem;
+
+  @media (min-width: $desktop-breakpoint) {
+    padding: 0 4rem;
+  }
 }
