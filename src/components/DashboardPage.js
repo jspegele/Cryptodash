@@ -62,7 +62,11 @@ export class DashboardPage extends React.Component {
             price: prices[i][currency].PRICE,
             changeDay: prices[i][currency].CHANGEDAY,
             changePctDay: prices[i][currency].CHANGEPCTDAY,
-            mktCap: prices[i][currency].MKTCAP
+            mktCap: prices[i][currency].MKTCAP,
+            totalVol24hr: prices[i][currency].VOLUMEDAY,
+            supply: prices[i][currency].SUPPLY,
+            high24hr: prices[i][currency].HIGH24HOUR,
+            low24hr: prices[i][currency].LOW24HOUR
           })
           self.props.updatePriceInfo({
             faves: true,

@@ -54,17 +54,25 @@ class CoinIndexPage extends React.Component {
     
     cc.priceFull(keysSplice, [currency]).then((prices) => {
       for(let i = 0; i < keysSplice.length; i++) {
-        let price = null, changeDay = null, changePctDay = null, mktCap = null, imgUrl = null;
+        let price = null, changeDay = null, changePctDay = null, mktCap = null, imgUrl = null, totalVol24hr = null, supply = null, high24hr = null, low24hr = null;
         if(prices[keysSplice[i]]) {
           price = prices[keysSplice[i]][currency].PRICE
           changeDay = prices[keysSplice[i]][currency].CHANGEDAY
           changePctDay = prices[keysSplice[i]][currency].CHANGEPCTDAY
           mktCap = prices[keysSplice[i]][currency].MKTCAP
+          totalVol24hr = prices[keysSplice[i]][currency].VOLUMEDAY
+          supply = prices[keysSplice[i]][currency].SUPPLY
+          high24hr = prices[keysSplice[i]][currency].HIGH24HOUR
+          low24hr = prices[keysSplice[i]][currency].LOW24HOUR
         } else {
           price = 0
           changeDay = 0
           changePctDay = 0
           mktCap = 0
+          totalVol24hr = 0
+          supply = 0
+          high24hr = 0
+          low24hr = 0
         }
         dataSplice[i] = {
           ...dataSplice[i],
@@ -72,6 +80,10 @@ class CoinIndexPage extends React.Component {
           changeDay,
           changePctDay,
           mktCap,
+          totalVol24hr,
+          supply,
+          high24hr,
+          low24hr,
           imgUrl
         }
       }

@@ -62,7 +62,7 @@
 }
 
 .coin__change {
-  font-size: 3.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
   margin-left: 1.6rem;
 }
@@ -79,8 +79,9 @@
   background: none;
   border: 1px solid $on-surface;
   color: $on-surface;
+  cursor: pointer;
   display: flex;
-  font-size: 2rem;
+  font-size: 1.82rem;
   justify-content: center;
   outline: none;
   padding: 1.6rem;
@@ -119,7 +120,28 @@
 .coin__details {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  margin-top: 2rem
+}
+
+.details__datapoint {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.6rem;
+}
+
+.datapoint__header {
+  color: $surface16;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.datapoint__data {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-top: .6rem;
 }
 
 .coin__aside { grid-area: aside; }

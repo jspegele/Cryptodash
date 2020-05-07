@@ -16,29 +16,57 @@ const CoinTile = (props) => {
       <div className="coin-tile__price">
         <span>
           {props.coin.price && (
-            props.coin.changeDay > 0 ? (
-              <span className="green-text"><span className="light-text">$</span>{props.coin.price >= .01 ? props.coin.price.toFixed(2) : props.coin.price.toFixed(5)}</span>
+            props.coin.price >= .01 ? (
+              props.coin.price.toFixed(2)
             ) : (
-              props.coin.changeDay < 0 ? (
-                <span className="red-text"><span className="light-text">$</span>{props.coin.price >= .01 ? props.coin.price.toFixed(2) : props.coin.price.toFixed(5)}</span>
+              props.coin.price >= .000001 ? (
+                props.coin.price.toFixed(5)
               ) : (
-                <span><span className="light-text">$</span>{props.coin.price >= .01 ? (
-                  props.coin.price.toFixed(2)
-                ) : (
-                  props.coin.price >= .000001 ? (
-                    props.coin.price.toFixed(5)
-                  ) : (
-                    props.coin.price.toFixed(8)
-                  )
-                )}</span>
+                props.coin.price.toFixed(8)
               )
             )
           )}
         </span>
-        <span className="coin-tile__change--mobile show-for-mobile">{props.coin.changePctDay && <span>{props.coin.changePctDay.toFixed(2)}<span className="light-text">%</span></span>}</span>
+        <span className="coin-tile__change--mobile show-for-mobile">
+          {props.coin.changePctDay && (
+            props.coin.changePctDay > 0 ? (
+              <span className="green-text"><span className="light-text">+</span>{props.coin.changePctDay.toFixed(2)}%</span>
+            ) : (
+              props.coin.changeDay < 0 ? (
+                <span className="red-text"><span className="light-text">-</span>{props.coin.changePctDay.toFixed(2) * -1}%</span>
+              ) : (
+                <span>---</span>
+              )
+            )
+          )}
+        </span>
       </div>
-      <div className="coin-tile__change show-for-desktop">{props.coin.changePctDay && <span>{props.coin.changePctDay.toFixed(2)}<span className="light-text">%</span></span>}</div>
-      <div className="coin-tile__cap">{props.coin.mktCap && <span>{(props.coin.mktCap / 1000000000).toFixed(1)}B</span>}</div>
+      <div className="coin-tile__change show-for-desktop">
+        {props.coin.changePctDay && (
+            props.coin.changePctDay > 0 ? (
+              <span className="green-text"><span className="light-text">+</span>{props.coin.changePctDay.toFixed(2)}%</span>
+            ) : (
+              props.coin.changeDay < 0 ? (
+                <span className="red-text"><span className="light-text">-</span>{props.coin.changePctDay.toFixed(2) * -1}%</span>
+              ) : (
+                <span>---</span>
+              )
+            )
+          )}
+      </div>
+      <div className="coin-tile__cap">
+        ${props.coin.mktCap && (
+          props.coin.mktCap > 1000000000 ? (
+            <span>{(props.coin.mktCap / 1000000000).toFixed(1)}B</span>
+          ) : (
+            props.coin.mktCap > 1000000 ? (
+              <span>{(props.coin.mktCap / 1000000).toFixed(1)}M</span>
+            ) : (
+              props.coin.mktCap
+            )
+          )
+        )}
+      </div>
     </Link>
   )
 }

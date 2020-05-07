@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { FaRegStar, FaCircleNotch, FaArrowUp, FaArrowDown } from 'react-icons/fa'
+import { FaStar, FaRegStar, FaCircleNotch, FaArrowUp, FaArrowDown } from 'react-icons/fa'
 import { editCoin } from '../actions/coins'
 import { addFavorite, removeFavorite } from '../actions/favorites'
 import CoinChart from './CoinChart'
@@ -28,13 +28,20 @@ class CoinPage extends React.Component {
           price: price[symbol][currency].PRICE,
           changeDay: price[symbol][currency].CHANGEDAY,
           changePctDay: price[symbol][currency].CHANGEPCTDAY,
-          mktCap: price[symbol][currency].MKTCAP
+          mktCap: price[symbol][currency].MKTCAP,
+          totalVol24hr: price[symbol][currency].VOLUMEDAY,
+          supply: price[symbol][currency].SUPPLY,
+          high24hr: price[symbol][currency].HIGH24HOUR,
+          low24hr: price[symbol][currency].LOW24HOUR
         })
       }).catch(console.error)
     }
   }
-  onFavorite = () => {
-
+  onAddFavorite = (e) => {
+    this.props.addFavorite(e.target.id)
+  }
+  onRemoveFavorite = (e) => {
+    this.props.removeFavorite(e.target.id)
   }
   render() {
     const coin = this.props.coins.find(coin => coin.symbol === this.props.match.params.symbol)
@@ -61,10 +68,10 @@ class CoinPage extends React.Component {
                 )}
                 <div className="coin__change">
                   {coin.changePctDay > 0 ? (
-                    <span className="green-text"><FaArrowUp size="2rem" />{coin.changePctDay.toFixed(2)}<span className="light-text">%</span></span>
+                    <span className="green-text"><FaArrowUp size="1.4rem" />{coin.changePctDay.toFixed(2)}<span className="light-text">%</span></span>
                   ) : (
                     coin.changePctDay < 0 ? (
-                      <span className="red-text"><FaArrowDown size="2rem" />{coin.changePctDay.toFixed(2) * -1}<span className="light-text">%</span></span>
+                      <span className="red-text"><FaArrowDown size="1.4rem" />{coin.changePctDay.toFixed(2) * -1}<span className="light-text">%</span></span>
                     ) : (
                       <span>{coin.changePctDay.toFixed(2)}<span className="light-text">%</span></span>
                     )
@@ -73,12 +80,89 @@ class CoinPage extends React.Component {
               </div>
             </div>
             <div className="coin__favorite">
-              <button type="button" className="add-favorite" onClick={this.onFavorite}><FaRegStar size="2.4rem" />Add to Favorites</button>
+              {this.props.favorites.includes(coin.symbol) ? (
+                <button type="button" className="add-favorite" id={coin.symbol} onClick={this.onRemoveFavorite}><FaStar size="2.4rem" />Remove Favorite</button>
+              ) : (
+                <button type="button" className="add-favorite" id={coin.symbol} onClick={this.onAddFavorite}><FaRegStar size="2.4rem" />Add to Favorites</button>
+              )}
             </div>
             <div className="coin__chart">
               <CoinChart symbol={coin.symbol} title={coin.name} />
-              <div className="chart__details">
-                
+              <div className="coin__details">
+                <div className="details__datapoint">
+                  <div className="datapoint__header">
+                    High (24hr)
+                  </div>
+                  <div className="datapoint__data">
+                    ${coin.high24hr && (
+                      coin.high24hr > .01 ? (
+                        coin.high24hr.toFixed(2)
+                      ) : (
+                        coin.high24hr.toFixed(5)
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="details__datapoint">
+                  <div className="datapoint__header">
+                    Low (24hr)
+                  </div>
+                  <div className="datapoint__data">
+                    ${coin.low24hr && (
+                      coin.low24hr > .01 ? (
+                        coin.low24hr.toFixed(2)
+                      ) : (
+                        coin.low24hr.toFixed(5)
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="details__datapoint">
+                  <div className="datapoint__header">
+                    Volume (24hr)
+                  </div>
+                  <div className="datapoint__data">
+                    {coin.totalVol24hr && (
+                      coin.totalVol24hr > .01 ? (
+                        coin.totalVol24hr.toFixed(2)
+                      ) : (
+                        coin.totalVol24hr.toFixed(5)
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="details__datapoint">
+                  <div className="datapoint__header">
+                    Market Cap
+                  </div>
+                  <div className="datapoint__data">
+                    ${coin.mktCap > 1000000000 ? (
+                      <span>{(coin.mktCap / 1000000000).toFixed(1)}B</span>
+                    ) : (
+                      coin.mktCap > 1000000 ? (
+                        <span>{(coin.mktCap / 1000000).toFixed(1)}M</span>
+                      ) : (
+                        coin.mktCap
+                      )
+                    )}
+                  </div>
+                </div>
+                <div className="details__datapoint">
+                  <div className="datapoint__header">
+                    Supply
+                  </div>
+                  <div className="datapoint__data">
+                    {coin.supply > 1000000000 ? (
+                      <span>{(coin.supply / 1000000000).toFixed(1)}B</span>
+                    ) : (
+                      coin.supply > 1000000 ? (
+                        <span>{(coin.supply / 1000000).toFixed(1)}M</span>
+                      ) : (
+                        coin.supply
+                      )
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="coin__aside">

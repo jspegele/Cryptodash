@@ -39,7 +39,11 @@ export class SettingsPage extends React.Component {
         price: price[symbol][currency].PRICE,
         changeDay: price[symbol][currency].CHANGEDAY,
         changePctDay: price[symbol][currency].CHANGEPCTDAY,
-        mktCap: price[symbol][currency].MKTCAP
+        mktCap: price[symbol][currency].MKTCAP,
+        totalVol24hr: price[symbol][currency].VOLUMEDAY,
+        supply: price[symbol][currency].SUPPLY,
+        high24hr: price[symbol][currency].HIGH24HOUR,
+        low24hr: price[symbol][currency].LOW24HOUR
       })
     }).catch(console.error)
   }
