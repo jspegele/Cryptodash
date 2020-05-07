@@ -1,10 +1,10 @@
-export default function (series, tickInterval) {
+export default function (series, title) {
   return {
     chart: {
         type: 'line'
     },
     title: {
-      text: 'Chart Title'
+      text: title
     },
     yAxis: {
       title: {

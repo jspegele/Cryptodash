@@ -23,7 +23,7 @@ export default {
     className: 'dark-container',
     plotBackgroundColor: lightTheme ? 'white' : '#1f1f1f',
     plotBorderWidth: 0,
-    spacingTop: 40,
+    spacingTop: 5,
     spacingRight: 40,
     spacingBottom: 40,
     spacingLeft: 40

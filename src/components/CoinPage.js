@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FaRegStar, FaCircleNotch, FaArrowUp, FaArrowDown } from 'react-icons/fa'
+import { editCoin } from '../actions/coins'
 import { addFavorite, removeFavorite } from '../actions/favorites'
 import CoinChart from './CoinChart'
 
@@ -8,30 +9,35 @@ const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
 
 class CoinPage extends React.Component {
-  state = {
-    coin: null
-  }
   componentDidMount = () => {
-    if (this.props.coins.length > 0 && !this.state.coin) {
-      const symbol = this.props.match.params.symbol
-      this.fetchCoin(symbol)
+    if (this.props.coins.length > 0) {
+      this.fetchCoinPrice(this.props.match.params.symbol)
     }
   }
   componentDidUpdate = () => {
-    if (this.props.coins.length > 0 && !this.state.coin) {
-      const symbol = this.props.match.params.symbol
-      this.fetchCoin(symbol)
+    if (this.props.coins.length > 0) {
+      this.fetchCoinPrice(this.props.match.params.symbol)
     }
   }
-  fetchCoin = (symbol) => {
+  fetchCoinPrice = (symbol) => {
     const coin = this.props.coins.find(coin => coin.symbol === symbol)
-    this.setState(() => ({ coin }))
+    if (!coin.hasOwnProperty('changeDay')) {
+      const currency = 'USD';
+      cc.priceFull(symbol, [currency]).then(price => {
+        this.props.editCoin(symbol, {
+          price: price[symbol][currency].PRICE,
+          changeDay: price[symbol][currency].CHANGEDAY,
+          changePctDay: price[symbol][currency].CHANGEPCTDAY,
+          mktCap: price[symbol][currency].MKTCAP
+        })
+      }).catch(console.error)
+    }
   }
   onFavorite = () => {
 
   }
   render() {
-    const coin = this.state.coin
+    const coin = this.props.coins.find(coin => coin.symbol === this.props.match.params.symbol)
     return (
       <div className="content-container">
         {coin ? (
@@ -70,8 +76,8 @@ class CoinPage extends React.Component {
               <button type="button" className="add-favorite" onClick={this.onFavorite}><FaRegStar size="2.4rem" />Add to Favorites</button>
             </div>
             <div className="coin__chart">
-              <CoinChart coin={coin}></CoinChart>
-              <div className="chartn__details">
+              <CoinChart symbol={coin.symbol} title={coin.name} />
+              <div className="chart__details">
                 
               </div>
             </div>
@@ -94,7 +100,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addFavorite: (favorite) => dispatch(addFavorite(favorite)),
-  removeFavorite: (favorite) => dispatch(removeFavorite(favorite))
+  removeFavorite: (favorite) => dispatch(removeFavorite(favorite)),
+  editCoin: (symbol, updates) => dispatch(editCoin(symbol, updates))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinPage)

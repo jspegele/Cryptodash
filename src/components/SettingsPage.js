@@ -13,6 +13,14 @@ const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
 
 export class SettingsPage extends React.Component {
+  state = {
+    firstVisit: true
+  }
+  componentDidMount = () => {
+    if (this.props.favorites.length > 0) {
+      this.setState(() => ({ firstVisit: false }))
+    }
+  }
   componentDidUpdate = () => {
     const json = JSON.stringify(this.props.favorites)
     localStorage.setItem('cryptodashFavorites', json)
@@ -47,14 +55,14 @@ export class SettingsPage extends React.Component {
     return (
       <div className="content-container">
         {/* <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div> */}
-        {this.firstVisit ? (
+        {this.state.firstVisit ? (
           <h1>Hello. Pick your favorite coins to populate your dashboard.</h1>
         ) : (
           <>
-            <h2>Your favorite coins</h2>
-            <FavoriteCoins coins={favoriteCoins} clickEvent={this.handleRemoveFavorite} tileType='favorite' />
+            <h1>Your favorite coins</h1>
           </>
         )}
+        <FavoriteCoins coins={favoriteCoins} clickEvent={this.handleRemoveFavorite} tileType='favorite' />
         <div className="index-header">
           <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
           <h2>Add up to 12 favorites</h2>

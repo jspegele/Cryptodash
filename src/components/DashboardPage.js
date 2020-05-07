@@ -7,6 +7,7 @@ import { setCoins, editCoin } from '../actions/coins'
 import { setFavorites } from '../actions/favorites'
 import { updatePriceInfo } from '../actions/price-info'
 import { history } from '../routers/AppRouter'
+import CoinChart from './CoinChart'
 
 const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
@@ -18,16 +19,26 @@ export class DashboardPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      prices: []
+      prices: [],
+      currentFavorite: null
     }
   }
   componentDidMount = () => {
     if (this.props.favorites.length === 0) {
       history.push('/settings')
+    } else {
+      let currentFavorite = ''
+      if (localStorage.getItem('cryptodashCurrentFavorite')) {
+        currentFavorite = localStorage.getItem('cryptodashCurrentFavorite')
+      } else {
+        currentFavorite = this.props.favorites[0]
+        localStorage.setItem('cryptodashCurrentFavorite', currentFavorite)
+      }
+      this.setState(() => ({ currentFavorite }))
     }
   }
   componentDidUpdate = () => {
-    if(!this.props.priceInfo.faves) {
+    if(this.props.coins.length > 0 && !this.props.priceInfo.faves) {
       this.handleUpdatePrices()
     }
   }
@@ -47,6 +58,7 @@ export class DashboardPage extends React.Component {
         const self = this
         setTimeout(function() {
           self.props.editCoin(i, {
+            priceFetched: true,
             price: prices[i][currency].PRICE,
             changeDay: prices[i][currency].CHANGEDAY,
             changePctDay: prices[i][currency].CHANGEPCTDAY,
@@ -60,6 +72,11 @@ export class DashboardPage extends React.Component {
         }, 300);
       })
     }).catch(console.error)
+  }
+  handleCurrentFavorite = (e) => {
+    const currentFavorite = e.target.id
+    this.setState(() => ({ currentFavorite }))
+    localStorage.setItem('cryptodashCurrentFavorite', currentFavorite)
   }
   render() {
     const favoriteCoins = this.props.coins.filter(coin => this.props.favorites.includes(coin.symbol))
@@ -83,7 +100,14 @@ export class DashboardPage extends React.Component {
         <div className="fave-list">
           {favoriteCoins.length > 0 ? (
             favoriteCoins.map(coin => (
-              <Link to={"/coin/"+coin.symbol} className='fave-tile' key={coin.symbol} id={coin.symbol} title='View coin details'>
+              <button
+                type="button"
+                className='fave-tile'
+                key={coin.symbol}
+                id={coin.symbol}
+                title='View coin details'
+                onClick={this.handleCurrentFavorite}
+              >
                 <div className="fave-tile__overview">
                   <div className="fave-tile__logo">
                     {coin.imageUrl ? (
@@ -98,23 +122,43 @@ export class DashboardPage extends React.Component {
                 <div className="fave-tile__price">
                   {coin.price ? (
                     coin.changeDay > 0 ? (
-                      <span className="green-text"><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretUp size="1.6rem" /></span>
+                      <span className="green-text">
+                        <span className="light-text">$</span>
+                        {coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}
+                        <FaCaretUp size="1.6rem" />
+                      </span>
                     ) : (
                       coin.changeDay < 0 ? (
-                        <span className="red-text"><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretDown size="1.6rem" /></span>
+                        <span className="red-text">
+                          <span className="light-text">$</span>
+                          {coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}
+                          <FaCaretDown size="1.6rem" />
+                        </span>
                       ) : (
-                        <span><span className="light-text">$</span>{coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}<FaCaretLeft size="1.6rem" /></span>
+                        <span>
+                          <span className="light-text">$</span>
+                          {coin.price >= .01 ? coin.price.toFixed(2) : coin.price.toFixed(5)}
+                          <FaCaretLeft size="1.6rem" />
+                        </span>
                       )
                     )
                   ) : 'no data'}
                 </div>
-              </Link>
+              </button>
               )
             )
           ) : (
             <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div>
           )}
         </div>
+        {(favoriteCoins.length > 0 && this.state.currentFavorite) && 
+          <div className="coin__chart">
+            <CoinChart symbol={this.state.currentFavorite} title={favoriteCoins.filter(coin => coin.symbol === this.state.currentFavorite)[0].name} />
+            <div className="chart__details">
+              
+            </div>
+          </div>
+        }
       </div>
     )
   }
