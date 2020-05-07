@@ -3,14 +3,18 @@ const lightTheme = false;
 
 export default {
   colors: [
-    '#61d936',
-    '#552ccb',
-    '#1163c9',
-    '#04A1EE',
-    '#08C6E0',
-    '#146B9E',
-    '#F376C1',
-    '#1B2839'
+    '#B388FF',
+    '#80D8FF',
+    '#B9F6CA',
+    '#FFFF8D',
+    '#8C9EFF',
+    '#84FFFF',
+    '#CCFF90',
+    '#FFE57F',
+    '#82B1FF',
+    '#A7FFEB',
+    '#F4FF81',
+    '#FFD180'
   ],
   chart: {
     backgroundColor: lightTheme ? 'white' : '#1f1f1f',

@@ -25,16 +25,18 @@ class CoinPage extends React.Component {
   }
   fetchCoin = (symbol) => {
     const coin = this.props.coins.find(coin => coin.symbol === symbol)
-    console.log(coin)
     this.setState(() => ({ coin }))
+  }
+  onFavorite = () => {
+
   }
   render() {
     const coin = this.state.coin
     return (
       <div className="content-container">
         {coin ? (
-          <div class="grid-container">
-            <div class="coin__header">
+          <div className="grid-container">
+            <div className="coin__header">
               <div className="coin__info">
                 <div className="coin__title">
                   <div className="coin__logo">
@@ -64,16 +66,16 @@ class CoinPage extends React.Component {
                 </div>
               </div>
             </div>
-            <div class="coin__favorite">
-              <button type="button" className="add-favorite" onClick="onFavorite"><FaRegStar size="2.4rem" />Add to Favorites</button>
+            <div className="coin__favorite">
+              <button type="button" className="add-favorite" onClick={this.onFavorite}><FaRegStar size="2.4rem" />Add to Favorites</button>
             </div>
-            <div class="coin__chart">
+            <div className="coin__chart">
               <CoinChart coin={coin}></CoinChart>
               <div className="chartn__details">
                 
               </div>
             </div>
-            <div class="coin__aside">
+            <div className="coin__aside">
               <h3>{coin.name} News</h3>
             </div>
           </div>

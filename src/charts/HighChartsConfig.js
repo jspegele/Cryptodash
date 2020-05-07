@@ -1,4 +1,4 @@
-export default function (series) {
+export default function (series, tickInterval) {
   return {
     chart: {
         type: 'line'
@@ -11,7 +11,9 @@ export default function (series) {
         text: 'Price'
       }
     },
-    xAxis: {type: 'datetime'},
+    xAxis: {
+      type: 'datetime'
+    },
     legend: {
       layout: 'vertical',
       align: 'right',

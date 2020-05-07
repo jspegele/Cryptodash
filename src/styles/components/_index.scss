@@ -3,10 +3,10 @@
 }
 
 .index-header {
-  align-items: flex-start;
+  align-items: flex-end;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
   margin-bottom: .6rem;
 
   h2 {
@@ -16,6 +16,7 @@
   @media (min-width: $desktop-breakpoint) {
     align-items: flex-end;
     flex-direction: row;
+    justify-content: space-between;
   }
 }
 
