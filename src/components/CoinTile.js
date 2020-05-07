@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaRegStar } from 'react-icons/fa'
+import { formatNumber } from '../utilities/numbers'
 
 const CoinTile = (props) => {
   return (
@@ -15,9 +15,9 @@ const CoinTile = (props) => {
       </div>
       <div className="coin-tile__price">
         <span>
-          {props.coin.price && (
+          ${props.coin.price && (
             props.coin.price >= .01 ? (
-              props.coin.price.toFixed(2)
+              formatNumber(props.coin.price.toFixed(2))
             ) : (
               props.coin.price >= .000001 ? (
                 props.coin.price.toFixed(5)
@@ -55,14 +55,18 @@ const CoinTile = (props) => {
           )}
       </div>
       <div className="coin-tile__cap">
-        ${props.coin.mktCap && (
+        {props.coin.mktCap && (
           props.coin.mktCap > 1000000000 ? (
-            <span>{(props.coin.mktCap / 1000000000).toFixed(1)}B</span>
+            <span>${(props.coin.mktCap / 1000000000).toFixed(1)}B</span>
           ) : (
             props.coin.mktCap > 1000000 ? (
-              <span>{(props.coin.mktCap / 1000000).toFixed(1)}M</span>
+              <span>${(props.coin.mktCap / 1000000).toFixed(1)}M</span>
             ) : (
-              props.coin.mktCap
+              props.coin.mktCap > 0 ? (
+                <span>${formatNumber(props.coin.mktCap.toFixed(2))}</span>
+              ) : (
+                <span>n/a</span>
+              )
             )
           )
         )}

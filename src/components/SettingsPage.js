@@ -31,6 +31,9 @@ export class SettingsPage extends React.Component {
   }
   handleRemoveFavorite = (e) => {
     this.props.removeFavorite(e.target.id)
+    if(e.target.id === localStorage.getItem('cryptodashCurrentFavorite')) {
+      localStorage.removeItem('cryptodashCurrentFavorite')
+    }
   }
   fetchPrice = (symbol) => {
     const currency = 'USD';

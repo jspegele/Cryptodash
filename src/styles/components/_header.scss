@@ -7,6 +7,11 @@
   margin-bottom: 30px;
   padding: 1.6rem 0;
   width: 100%;
+
+  a {
+    color: $on-surface;
+    text-decoration: none;
+  }
 }
 
 .mobile-menu {

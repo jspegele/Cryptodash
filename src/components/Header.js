@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 
 const Header = () => {
@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className='content-container'>
       <div className="header">
-        <h1 className="header__title">CryptoDash</h1>
+        <Link to="/" onClick={closeMobileMenu}><h1 className="header__title">CryptoDash</h1></Link>
         <div className="mobile-menu show-for-mobile"><FaBars size="3.2rem" onClick={handleMobileMenu} /></div>
         <div className={"nav " + mobileClass}>
           <NavLink to="/" className="nav__link" activeClassName="nav__link--active" exact={true} onClick={closeMobileMenu}>Dashboard</NavLink>

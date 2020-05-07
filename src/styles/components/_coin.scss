@@ -5,9 +5,9 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-rows: auto auto;
-  gap: 4rem 2rem;
+  gap: 4rem 4rem;
   grid-template-areas: "header favorite" "chart aside";
 }
 
@@ -111,6 +111,7 @@
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
+  margin-bottom: 4rem;
 }
 
 .coin__figure {
@@ -144,4 +145,13 @@
   margin-top: .6rem;
 }
 
-.coin__aside { grid-area: aside; }
+.coin__aside { 
+  grid-area: aside;
+
+  h3 {
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1;
+    padding-bottom: 2.4rem;
+  }
+}

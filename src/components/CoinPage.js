@@ -4,6 +4,9 @@ import { FaStar, FaRegStar, FaCircleNotch, FaArrowUp, FaArrowDown } from 'react-
 import { editCoin } from '../actions/coins'
 import { addFavorite, removeFavorite } from '../actions/favorites'
 import CoinChart from './CoinChart'
+import CoinDetails from './CoinDetails'
+import CoinNews from './CoinNews'
+import { formatNumber } from '../utilities/numbers'
 
 const cc = require('cryptocompare')
 cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
@@ -62,7 +65,7 @@ class CoinPage extends React.Component {
               <div className="coin__price">
                 <span className="light-text">$</span>
                 {coin.price > .01 ? (
-                  coin.price.toFixed(2)
+                  formatNumber(coin.price.toFixed(2))
                 ) : (
                   coin.price.toFixed(5)
                 )}
@@ -88,85 +91,11 @@ class CoinPage extends React.Component {
             </div>
             <div className="coin__chart">
               <CoinChart symbol={coin.symbol} title={coin.name} />
-              <div className="coin__details">
-                <div className="details__datapoint">
-                  <div className="datapoint__header">
-                    High (24hr)
-                  </div>
-                  <div className="datapoint__data">
-                    ${coin.high24hr && (
-                      coin.high24hr > .01 ? (
-                        coin.high24hr.toFixed(2)
-                      ) : (
-                        coin.high24hr.toFixed(5)
-                      )
-                    )}
-                  </div>
-                </div>
-                <div className="details__datapoint">
-                  <div className="datapoint__header">
-                    Low (24hr)
-                  </div>
-                  <div className="datapoint__data">
-                    ${coin.low24hr && (
-                      coin.low24hr > .01 ? (
-                        coin.low24hr.toFixed(2)
-                      ) : (
-                        coin.low24hr.toFixed(5)
-                      )
-                    )}
-                  </div>
-                </div>
-                <div className="details__datapoint">
-                  <div className="datapoint__header">
-                    Volume (24hr)
-                  </div>
-                  <div className="datapoint__data">
-                    {coin.totalVol24hr && (
-                      coin.totalVol24hr > .01 ? (
-                        coin.totalVol24hr.toFixed(2)
-                      ) : (
-                        coin.totalVol24hr.toFixed(5)
-                      )
-                    )}
-                  </div>
-                </div>
-                <div className="details__datapoint">
-                  <div className="datapoint__header">
-                    Market Cap
-                  </div>
-                  <div className="datapoint__data">
-                    ${coin.mktCap > 1000000000 ? (
-                      <span>{(coin.mktCap / 1000000000).toFixed(1)}B</span>
-                    ) : (
-                      coin.mktCap > 1000000 ? (
-                        <span>{(coin.mktCap / 1000000).toFixed(1)}M</span>
-                      ) : (
-                        coin.mktCap
-                      )
-                    )}
-                  </div>
-                </div>
-                <div className="details__datapoint">
-                  <div className="datapoint__header">
-                    Supply
-                  </div>
-                  <div className="datapoint__data">
-                    {coin.supply > 1000000000 ? (
-                      <span>{(coin.supply / 1000000000).toFixed(1)}B</span>
-                    ) : (
-                      coin.supply > 1000000 ? (
-                        <span>{(coin.supply / 1000000).toFixed(1)}M</span>
-                      ) : (
-                        coin.supply
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
+              <CoinDetails coin={coin} />
             </div>
             <div className="coin__aside">
               <h3>{coin.name} News</h3>
+              {this.props.match.params.symbol && <CoinNews categories={[this.props.match.params.symbol]} showBody={false} results={5} />}
             </div>
           </div>
         ) : (

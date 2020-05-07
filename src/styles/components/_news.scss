@@ -1,0 +1,22 @@
+.news-list {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.news-list__story {
+  margin-bottom: 2.4rem;
+}
+
+.news-list__title {
+  cursor: pointer;
+  a {
+    color: $on-surface;
+    text-decoration: none;
+  }
+}
+
+.news-list__subtitle {
+  color: $surface16;
+}
