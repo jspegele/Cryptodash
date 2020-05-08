@@ -1,7 +1,8 @@
-export default function (series, title) {
+export default function (series, title, yAxisVisible, chartMargin) {
   return {
     chart: {
-        type: 'line'
+        type: 'line',
+        margin: chartMargin
     },
     title: {
       text: title
@@ -9,7 +10,8 @@ export default function (series, title) {
     yAxis: {
       title: {
         text: 'Price'
-      }
+      },
+      visible: yAxisVisible
     },
     xAxis: {
       type: 'datetime'

@@ -39,7 +39,8 @@ class CoinChart extends React.Component {
         } else {
           this.setState(() => ({
             series: [{
-              data: prices
+              data: prices,
+              showInLegend: false
             }]
           }))
         }

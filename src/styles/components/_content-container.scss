@@ -3,7 +3,8 @@
   padding: 0 1.6rem;
   max-width: 120rem;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     padding: 0 4rem;
   }
+  
 }

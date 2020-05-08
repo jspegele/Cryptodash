@@ -22,7 +22,7 @@
   text-decoration: none;
   transition: background-color .2s;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     grid-template-columns: 50px 25px 1fr 100px 125px 100px;
   }
 
@@ -41,7 +41,7 @@
   display: none;
   justify-content: center;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     display: flex;
   }
 }
@@ -52,7 +52,7 @@
   img {
     width: 3.6rem;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
       width: 2.2rem;
     }
   }
@@ -63,7 +63,7 @@
   overflow: hidden;
   flex-direction: column;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     align-items: center;
     flex-direction: row;
   }
@@ -73,7 +73,7 @@
     display: inline-block;
     font-weight: 300;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
       margin-left: 2.4rem;
     }
   }
@@ -84,7 +84,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     flex-direction: row;
   }
 }
@@ -93,7 +93,7 @@
   display: none;
   justify-content: flex-end;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     display: flex;
   }
 }
@@ -102,7 +102,7 @@
   display: none;
   justify-content: flex-end;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     display: flex;
   }
 }
@@ -115,7 +115,7 @@
   grid-gap: .1rem;
   margin-bottom: 40px;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     grid-template-columns: 1fr 1fr 1fr;
   }
   
@@ -152,21 +152,21 @@
     overflow: hidden;
     text-align: left;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
       flex-direction: row;
     }
 
     .fave-tile__logo {
       align-items: center;
 
-      @media (min-width: $desktop-breakpoint) {
+      @media (min-width: $tablet-breakpoint) {
         display: flex;
       }
 
       img {
         width: 3.2rem;
 
-        @media (min-width: $desktop-breakpoint) {
+        @media (min-width: $tablet-breakpoint) {
           margin-right: 2rem;
         }
       }
@@ -180,7 +180,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
 
-      @media (min-width: $desktop-breakpoint) {
+      @media (min-width: $tablet-breakpoint) {
         display: flex;
       }
     }
@@ -234,7 +234,7 @@
   .fave-tile__price {
     color: $error;
 
-    @media (min-width: $desktop-breakpoint) {
+    @media (min-width: $tablet-breakpoint) {
       color: $on-surface;
       visibility: hidden;
     }
@@ -270,7 +270,7 @@
     .fave-tile__logo {
       img, svg {
 
-        @media (min-width: $desktop-breakpoint) {
+        @media (min-width: $tablet-breakpoint) {
           margin-left: 2.4rem;
         }
       }

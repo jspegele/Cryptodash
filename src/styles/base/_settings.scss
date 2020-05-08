@@ -20,16 +20,6 @@ $secondary: #03dac6;
 $error: #cf6679;
 $positive: $secondary;
 
-$desktop-breakpoint: 45rem;
+$tablet-breakpoint: 45rem;
+$desktop-breakpoint: 76.8rem;
 $large-screen-breakpoint: 90rem;
-
-
-
-
-@media (min-width: $desktop-breakpoint) {
-
-}
-
-@media (min-width: $large-screen-breakpoint) {
-  
-}

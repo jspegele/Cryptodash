@@ -5,17 +5,30 @@
 
 .grid-container {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
   gap: 4rem 4rem;
-  grid-template-areas: "header favorite" "chart aside";
+  grid-template-areas: "header" "chart" "favorite" "aside";
+
+  @media (min-width: $tablet-breakpoint) {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 4rem 4rem;
+    grid-template-areas: "header favorite" "chart aside";
+  }
 }
 
 .coin__header {
   grid-area: header;
-  align-items: center;
   display: flex;
-  margin-bottom: 40px;
+  flex-direction: column;
+
+  @media (min-width: $tablet-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 4rem;
+  }
 }
 
 .coin__info {
@@ -26,14 +39,20 @@
 
 .coin__logo {
   img {
-    margin-right: 3rem;
-    width: 6.4rem;
+    margin-right: 1.2rem;
+    width: 4rem;
+
+    @media (min-width: $tablet-breakpoint) {
+      margin-right: 3rem;
+      width: 6.4rem;
+    }
   }
 }
 
 .coin__title {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
 
   h1 {
     font-size: 3.6rem;
@@ -58,7 +77,10 @@
   flex-wrap: wrap;
   font-size: 3.6rem;
   font-weight: 500;
-  margin-left: 3rem;
+
+  @media (min-width: $tablet-breakpoint) {
+    margin-left: 3rem;
+  }
 }
 
 .coin__change {
@@ -72,6 +94,10 @@
   align-items: flex-start;
   display: flex;
   justify-content: flex-end;
+
+  @media (min-width: $tablet-breakpoint) {
+    
+  }
 }
 
 .add-favorite {
@@ -111,7 +137,10 @@
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 1;
-  margin-bottom: 4rem;
+
+  @media (min-width: $tablet-breakpoint) {
+    margin-bottom: 4rem;
+  }
 }
 
 .coin__figure {
@@ -119,30 +148,49 @@
 }
 
 .coin__details {
-  align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  margin-top: 2rem
+  margin-bottom: 2rem;
+
+  @media (min-width: $tablet-breakpoint) {
+    align-items: center;
+    flex-direction: row;
+    margin-top: 2rem;
+    margin-bottom: 0;
+  }
 }
 
 .details__datapoint {
-  align-items: flex-start;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 1.6rem;
+
+  @media (min-width: $tablet-breakpoint) {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .datapoint__header {
   color: $surface16;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 400;
+
+  @media (min-width: $tablet-breakpoint) {
+    font-size: 1.4rem;
+  }
 }
 
 .datapoint__data {
   font-size: 1.8rem;
   font-weight: 300;
-  margin-top: .6rem;
+
+  @media (min-width: $tablet-breakpoint) {
+    margin-top: .6rem;
+  }
 }
 
 .coin__aside { 

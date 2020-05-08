@@ -33,7 +33,7 @@
   width: 100%;
   z-index: 1000;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     background: none;
     border: none;
     height: 3.4rem;
@@ -50,7 +50,7 @@
   max-height: 0px;
   transition: max-height .3s;
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     max-height: 1000px;
   }
 }
@@ -76,7 +76,7 @@
     color: lighten($primary, 14%);
   }
 
-  @media (min-width: $desktop-breakpoint) {
+  @media (min-width: $tablet-breakpoint) {
     border: none;
     display: inline;
     font-size: 1.8rem;
