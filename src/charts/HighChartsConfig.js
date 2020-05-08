@@ -1,7 +1,8 @@
-export default function (series, title, yAxisVisible, chartMargin) {
+export default function (series, title, chartHeight, yAxisVisible, chartMargin) {
   return {
     chart: {
         type: 'line',
+        height: chartHeight,
         margin: chartMargin
     },
     title: {

@@ -10,9 +10,11 @@ cc.setApiKey(process.env.REACT_APP_CRYPTO_COMPARE_API_KEY)
 class HighChart extends React.Component {
   render() {
     let chartsTheme = HighChartsDefaultTheme
+    let chartHeight = 500
     let yAxisVisible = true
     let chartMargin = undefined
     if (window.innerWidth < 720) {
+      chartHeight = 300
       yAxisVisible = false
       chartsTheme = HighChartsMobileTheme
       chartMargin = [0, 10, 50, 10]
@@ -31,7 +33,7 @@ class HighChart extends React.Component {
               <option value="month">1M</option>
               <option value="year">1Y</option>
             </select>
-            <ReactHighcharts config={HighchartsConfig(this.props.series, this.props.title, yAxisVisible, chartMargin )}/>
+            <ReactHighcharts config={HighchartsConfig(this.props.series, this.props.title, chartHeight, yAxisVisible, chartMargin )}/>
           </div>
         ) : (
           <div className="chart chart--centered">

@@ -1,9 +1,10 @@
 .chart {
   background-color: $surface;
-  min-height: 50rem;
+  min-height: 30rem;
 
   @media (min-width: $tablet-breakpoint) {
     background-color: $surface1;
+    min-height: 50rem;
   }
 }
 
