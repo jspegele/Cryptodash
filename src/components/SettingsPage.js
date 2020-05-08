@@ -25,6 +25,9 @@ export class SettingsPage extends React.Component {
     const json = JSON.stringify(this.props.favorites)
     localStorage.setItem('cryptodashFavorites', json)
   }
+  componentWillUnmount = () => {
+    this.props.setTextFilter('')
+  }
   handleAddFavorite = (e) => {
     this.props.addFavorite(e.target.id)
     this.fetchPrice(e.target.id)
@@ -61,7 +64,6 @@ export class SettingsPage extends React.Component {
     }
     return (
       <div className="content-container">
-        {/* <div className="loading__notificaton">Loading coin data<FaCircleNotch size="2.4rem" className="fa-spin" /></div> */}
         {this.state.firstVisit ? (
           <h1>Hello. Pick your favorite coins to populate your dashboard.</h1>
         ) : (
@@ -71,7 +73,7 @@ export class SettingsPage extends React.Component {
         )}
         <FavoriteCoins coins={favoriteCoins} clickEvent={this.handleRemoveFavorite} tileType='favorite' />
         <div className="index-header">
-          <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
+          <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text} onChange={this.handleTextChange} />
           <h2>Add up to 12 favorites</h2>
         </div>
         {this.props.coins.length === 0 ? (

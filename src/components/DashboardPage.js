@@ -24,6 +24,7 @@ export class DashboardPage extends React.Component {
       prices: [],
       currentFavorite: null
     }
+    this.timer = null
   }
   componentDidMount = () => {
     if (this.props.favorites.length === 0) {
@@ -44,6 +45,9 @@ export class DashboardPage extends React.Component {
       this.handleUpdatePrices()
     }
   }
+  componentWillUnmount = () => {
+    clearTimeout(this.timer)
+  }
   handleUpdatePrices = () => {
     this.updatePrices()
     this.props.updatePriceInfo({
@@ -58,7 +62,7 @@ export class DashboardPage extends React.Component {
     cc.priceFull(favoriteSymbols, [currency]).then(prices => {
       Object.keys(prices).forEach(i => {
         const self = this
-        setTimeout(function() {
+        this.timer = setTimeout(function() {
           self.props.editCoin(i, {
             priceFetched: true,
             price: prices[i][currency].PRICE,

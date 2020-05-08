@@ -170,7 +170,8 @@
   @media (min-width: $tablet-breakpoint) {
     align-items: flex-start;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    min-height: 8.8rem;
   }
 }
 

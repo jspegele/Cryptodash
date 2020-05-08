@@ -27,14 +27,19 @@ class CoinIndexPage extends React.Component {
     sort: ''
   }
   componentDidMount = () => {
-    if(!this.props.priceInfo.all) {
+    if(!this.props.priceInfo.all && this.props.coins.length > 0) {
+      this.fetchCoins()
+    }
+    this._ismounted = true;
+  }
+  componentDidUpdate = () => {
+    if(!this.props.priceInfo.all && this.props.coins.length > 0) {
       this.fetchCoins()
     }
   }
-  componentDidUpdate = () => {
-    if(!this.props.priceInfo.all) {
-      this.fetchCoins()
-    }
+  componentWillUnmount() {
+     this._ismounted = false;
+     this.props.setTextFilter('')
   }
   updatePrices = () => {
     document.getElementById('refresh-prices-icon').classList.add('fa-spin')
@@ -98,11 +103,13 @@ class CoinIndexPage extends React.Component {
           all: true,
           allLastUpdated: moment().valueOf()
         })
-        this.setState(() => ({
-          pricesLoaded: true,
-          sort: 'mktCapDesc'
-        }))
-        document.getElementById('refresh-prices-icon').classList.remove('fa-spin')
+        if (this._ismounted) {
+          this.setState(() => ({
+            pricesLoaded: true,
+            sort: 'mktCapDesc'
+          }))
+          document.getElementById('refresh-prices-icon').classList.remove('fa-spin')
+        }
         return
       }
         
@@ -151,7 +158,10 @@ class CoinIndexPage extends React.Component {
     return (
       <div className="content-container">
         <div className="index-header">
-          <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text.searchText} onChange={this.handleTextChange} />
+
+        {/* LOAD CURRENT TEXT FILTER INTO SEARCH BAR WHEN RETURNING TO PAGE */}
+
+          <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text} onChange={this.handleTextChange} />
           <div className="updater">
             <div className="updater__last-updated">
               Last Updated:
