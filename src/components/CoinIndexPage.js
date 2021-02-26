@@ -51,11 +51,12 @@ class CoinIndexPage extends React.Component {
     for(let i = 0; i < coins.length; i++) {
       coinKeys.push(coins[i].symbol)
     }
-    this.fetchPrices([], [], [...coinKeys], [...coins], 200, 'USD')
+    this.fetchPrices([], [], [...coinKeys], [...coins], 100, 'USD')
   }
   fetchPrices = (processedKeys, processedCoins, remainingKeys, remainingData, spliceSize, currency) => {
     const keysSplice = remainingKeys.splice(0,spliceSize)
     const dataSplice = remainingData.splice(0,spliceSize)
+    console.log(keysSplice)
     
     cc.priceFull(keysSplice, [currency]).then((prices) => {
       for(let i = 0; i < keysSplice.length; i++) {
@@ -264,14 +265,14 @@ const mapDispatchToProps = (dispatch) => ({
   setCoins: (coins) => dispatch(setCoins(coins)),
   updatePriceInfo: (lastUpdated) => dispatch(updatePriceInfo(lastUpdated)),
   setTextFilter: (text) => dispatch(setTextFilter(text)),
-  sortByNameAsc: (text) => dispatch(sortByNameAsc()),
-  sortByNameDesc: (text) => dispatch(sortByNameDesc()),
-  sortByMktCapAsc: (text) => dispatch(sortByMktCapAsc()),
-  sortByMktCapDesc: (text) => dispatch(sortByMktCapDesc()),
-  sortByPriceAsc: (text) => dispatch(sortByPriceAsc()),
-  sortByPriceDesc: (text) => dispatch(sortByPriceDesc()),
-  sortByChangeAsc: (text) => dispatch(sortByChangeAsc()),
-  sortByChangeDesc: (text) => dispatch(sortByChangeDesc())
+  sortByNameAsc: () => dispatch(sortByNameAsc()),
+  sortByNameDesc: () => dispatch(sortByNameDesc()),
+  sortByMktCapAsc: () => dispatch(sortByMktCapAsc()),
+  sortByMktCapDesc: () => dispatch(sortByMktCapDesc()),
+  sortByPriceAsc: () => dispatch(sortByPriceAsc()),
+  sortByPriceDesc: () => dispatch(sortByPriceDesc()),
+  sortByChangeAsc: () => dispatch(sortByChangeAsc()),
+  sortByChangeDesc: () => dispatch(sortByChangeDesc())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinIndexPage)

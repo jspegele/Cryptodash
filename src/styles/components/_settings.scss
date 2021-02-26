@@ -1,0 +1,13 @@
+h4.dash-link {
+  margin-bottom: 1.2rem;
+
+  a {
+    color: $on-surface;
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten($primary, 14%);
+    }
+  }
+}

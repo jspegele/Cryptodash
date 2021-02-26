@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { FaCircleNotch } from 'react-icons/fa'
 import selectCoins from '../selectors/coins'
 import { editCoin } from '../actions/coins'
@@ -71,6 +72,7 @@ export class SettingsPage extends React.Component {
             <h1>Your favorite coins</h1>
           </>
         )}
+        {favoriteCoins.length > 0 && <h4 className="dash-link"><Link to="/">Go to you dashboard now &raquo;</Link></h4>}
         <FavoriteCoins coins={favoriteCoins} clickEvent={this.handleRemoveFavorite} tileType='favorite' />
         <div className="index-header">
           <input type="text" className="text-input" placeholder="Search coins" value={this.props.filters.text} onChange={this.handleTextChange} />
