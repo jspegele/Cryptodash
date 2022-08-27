@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaCircleNotch } from 'react-icons/fa'
 import FavoriteTile from './FavoriteTile'
 
 const FavoriteCoins = (props) => (
