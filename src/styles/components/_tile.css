@@ -1,0 +1,292 @@
+.coin-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: .1rem;
+  margin-bottom: 40px;
+}
+
+.coin-tile {
+  background-color: var(--surface1);
+  border: .1rem solid var(--surface);
+  border-top: none;
+  color: var(--on-surface);
+  cursor: pointer;
+  display: grid;
+  font-size: 2rem;
+  font-weight: 400;
+  grid-gap: 1.2rem;
+  grid-template-columns: 50px 2fr 1fr;
+  padding: 1.8rem;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+
+.coin-tile:hover {
+  background-color: var(--surface3);
+}
+
+.coin-tile > * {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.coin-tile__order {
+  display: none;
+  justify-content: center;
+}
+
+.coin-tile__logo {
+  margin-right: 2rem;
+}
+  
+.coin-tile__logo img {
+  width: 3.6rem;
+}
+
+.coin-tile__name {
+  align-items: flex-start;
+  overflow: hidden;
+  flex-direction: column;
+}
+  
+.coin-tile__symbol {
+  color: var(--surface2)4;
+  display: inline-block;
+  font-weight: 300;
+}
+
+.coin-tile__price {
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.coin-tile__change {
+  display: none;
+  justify-content: flex-end;
+}
+
+.coin-tile__cap {
+  display: none;
+  justify-content: flex-end;
+}
+
+/* Favorite Tiles */
+
+.fave-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: .1rem;
+  margin-bottom: 40px;
+}
+
+.fave-list--more {
+  grid-template-columns: 1fr;
+}
+
+.fave-tile {
+  align-items: center;
+  background-color: var(--surface1);
+  border: .1rem solid var(--surface);
+  border-top: none;
+  color: var(--on-surface);
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  justify-content: space-between;
+  outline: none;
+  padding: 1.2rem;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+
+.fave-tile:hover {
+  background-color: var(--surface3);
+  color: var(--on-surface);
+}
+
+.fave-tile > * {
+  pointer-events: none;
+}
+
+.fave-tile .fave-tile__overview {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  text-align: left;
+}
+
+.fave-tile .fave-tile__overview .fave-tile__logo {
+  align-items: center;
+}
+
+.fave-tile .fave-tile__overview .fave-tile__logo img {
+  width: 3.2rem;
+}
+
+.fave-tile .fave-tile__overview .fave-tile__name {
+  display: none;
+  margin-right: 1.6rem;
+  max-width: 13rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (min-width: 45rem) {
+    display: flex;
+  }
+}
+
+.fave-tile .fave-tile__overview .fave-tile__symbol {
+  color: var(--surface2)4;
+  font-weight: 300;
+}
+  
+.fave-tile .fave-tile__price {
+  font-size: 1.8rem;
+  margin-left: auto;
+}
+
+.fave-tile .fave-tile__price svg {
+  margin: 0 0 .1rem 0;
+  padding-top: .3rem;
+}
+
+.fave-tile--currentFave {
+  border: .1rem solid var(--primary);
+}
+
+.fave-tile--remove:hover {
+  background-color: var(--error);
+  color: var(--on-primary);
+}
+
+.fave-tile--remove:hover .fave-tile__overview .fave-tile__symbol {
+  color: var(--surface12);
+}
+
+.fave-tile--remove:hover .fave-tile__price {
+  visibility: visible;
+}
+
+.fave-tile--remove .fave-tile__overview {
+  flex-direction: row;
+}
+
+.fave-tile--remove .fave-tile__overview .fave-tile__logo {
+  margin-right: 1rem;
+}
+
+.fave-tile--remove .fave-tile__overview .fave-tile__name {
+  max-width: 18rem;
+}
+
+.fave-tile--remove .fave-tile__price {
+  color: var(--error);
+}
+
+.fave-tile--add:hover {
+  background-color: var(--positive);
+  color: var(--on-primary);
+}
+
+.fave-tile--add:hover .fave-tile__overview .fave-tile__symbol {
+  color: var(--surface12);
+}
+
+.fave-tile--add .fave-tile__overview {
+  flex-direction: row;
+}
+
+.fave-tile--add .fave-tile__overview .fave-tile__name {
+  max-width: none;
+  overflow: visible;
+}
+
+.fave-tile--add .fave-tile__overview .fave-tile__symbol {
+  font-weight: 300;
+  margin-left: 2.4rem;
+}
+
+.fave-tile--add .fave-tile__price {
+  visibility: visible;
+}
+
+.fave-tile--disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+  
+.fave-tile--disabled:hover {
+  background-color: var(--surface1);
+  color: var(--on-primary);
+}
+
+.fave-tile--disabled .fave-tile__price {
+  visibility: hidden;
+}
+
+@media (min-width: 45rem) {
+  .coin-tile {
+    grid-template-columns: 50px 25px 1fr 100px 125px 100px;
+  }
+
+  .coin-tile__order {
+    display: flex;
+  }
+
+  .coin-tile__logo img {
+    width: 2.2rem;
+  }
+
+  .coin-tile__name {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .coin-tile__symbol {
+    margin-left: 2.4rem;
+  }
+
+  .coin-tile__price {
+    flex-direction: row;
+  }
+
+  .coin-tile__change {
+    display: flex;
+  }
+
+  .coin-tile__cap {
+    display: flex;
+  }
+
+  .fave-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .fave-tile .fave-tile__overview {
+    flex-direction: row;
+  }
+
+  .fave-tile .fave-tile__overview .fave-tile__logo {
+    display: flex;
+  }
+
+  .fave-tile .fave-tile__overview .fave-tile__logo img {
+    margin-right: 2rem;
+  }
+
+  .fave-tile--remove .fave-tile__price {
+    color: var(--on-surface);
+    visibility: hidden;
+  }
+
+  .fave-tile--add .fave-tile__overview .fave-tile__logo img,
+  .fave-tile--add .fave-tile__overview .fave-tile__logo svg {
+      margin-left: 2.4rem;
+  }
+}

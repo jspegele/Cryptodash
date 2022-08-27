@@ -6,7 +6,7 @@ import configureStore from './store/configureStore'
 import { setCoins } from './actions/coins'
 import { setFavorites } from './actions/favorites'
 import * as serviceWorker from './serviceWorker'
-import './styles/styles.scss'
+import './styles/styles.css'
 
 const store = configureStore()
 

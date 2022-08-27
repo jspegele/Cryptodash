@@ -11,11 +11,11 @@
 }
 
 .green-text {
-  color: $positive;
+  color: var(--positive);
 }
 
 .red-text {
-  color: $error;
+  color: var(--error);
 }
 
 .light-text {

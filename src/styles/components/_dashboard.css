@@ -1,0 +1,44 @@
+.dashboard {
+  margin-bottom: 6rem;
+}
+
+.updater {
+  display: flex;
+  font-size: 1.4rem;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.updater__button {
+  align-items: center;
+  background-color: var(--primary);
+  border: none;
+  display: flex;
+  justify-content: center;
+  margin-left: 1rem;
+  padding: .4rem .8rem;
+  outline: none;
+}
+
+.updater__button:hover {
+  background-color: darken(var(--primary), 4%);
+}
+
+.updater__button:active {
+  background-color: darken(var(--primary), 4%);
+  -webkit-box-shadow: inset 0px 0px .5rem var(--surface6);
+     -moz-box-shadow: inset 0px 0px .5rem var(--surface6);
+          box-shadow: inset 0px 0px .5rem var(--surface6);
+   outline: none;
+}
+
+.updater__button svg {
+  margin-right: .6rem;
+}
+
+.updater__time {
+  display: inline-block;
+  font-family: 'Roboto Mono';
+  text-align: center;
+  width: 6rem;
+}

@@ -11,12 +11,13 @@
 
 .news-list__title {
   cursor: pointer;
-  a {
-    color: $on-surface;
-    text-decoration: none;
-  }
+}
+
+.news-list__title a {
+  color: var(--on-surface);
+  text-decoration: none;
 }
 
 .news-list__subtitle {
-  color: $surface16;
+  color: var(--surface16);
 }

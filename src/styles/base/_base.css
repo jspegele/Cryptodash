@@ -13,8 +13,8 @@ html {
 }
 
 body {
-  background-color: $surface;
-  color: $on-surface;
+  background-color: var(--surface);
+  color: var(--on-surface);
   font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
   line-height: 1.6;
@@ -37,6 +37,7 @@ h2 {
 .fa-spin {
   animation: fa-spin 2s infinite linear;
 }
+
 @keyframes fa-spin {
   0% {
     transform: rotate(0deg);

@@ -1,0 +1,13 @@
+h4.dash-link {
+  margin-bottom: 1.2rem;
+}
+
+h4.dash-link a {
+  color: var(--on-surface);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+h4.dash-link a:hover {
+  color: var(--primary-light);
+}

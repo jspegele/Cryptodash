@@ -2,9 +2,10 @@
   margin: 0 auto;
   padding: 0 1.6rem;
   max-width: 120rem;
+}
 
-  @media (min-width: $tablet-breakpoint) {
+@media (min-width: 45rem) {
+  .content-container {
     padding: 0 4rem;
   }
-  
 }

@@ -6,8 +6,10 @@
   height: 5rem;
   padding: 1.2rem;
   width: 100%;
+}
 
-  @media (min-width: $tablet-breakpoint) {
+@media (min-width: 45rem) {
+  .text-input {
     max-width: 37rem;
   }
 }

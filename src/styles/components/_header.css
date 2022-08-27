@@ -7,22 +7,20 @@
   margin-bottom: 30px;
   padding: 1.6rem 0;
   width: 100%;
-
-  a {
-    color: $on-surface;
-    text-decoration: none;
-  }
 }
 
-.mobile-menu {
-    svg {
-    margin-top: 1rem;
-  }
+.header a {
+  color: var(--on-surface);
+  text-decoration: none;
+}
+
+.mobile-menu svg {
+  margin-top: 1rem;
 }
 
 .nav {
-  background: $primary;
-  border-top: .2rem solid $primary;
+  background: var(--primary);
+  border-top: .2rem solid var(--primary);
   left: 0;
   margin-top: 2rem;
   max-height: 1000px;
@@ -32,27 +30,11 @@
   transition:  max-height 1s;
   width: 100%;
   z-index: 1000;
-
-  @media (min-width: $tablet-breakpoint) {
-    background: none;
-    border: none;
-    height: 3.4rem;
-    left: auto;
-    margin-top: 0;
-    position: static;
-    top: auto;
-    width: auto;
-    z-index: 1;
-  }
 }
 
 .nav-hidden {
   max-height: 0px;
   transition: max-height .3s;
-
-  @media (min-width: $tablet-breakpoint) {
-    max-height: 1000px;
-  }
 }
 
 .header__title {
@@ -63,20 +45,42 @@
 }
 
 .nav__link {
-  border-bottom: .2rem solid $primary;
-  color: $on-surface;
+  border-bottom: .2rem solid var(--primary);
+  color: var(--on-surface);
   display: block;
   font-size: 2rem;
   padding: 1rem 2rem;
   text-decoration: none;
   transition: color .2s;
   width: 100%;
+}
 
-  &:hover {
-    color: lighten($primary, 14%);
+.nav__link:hover {
+  color: var(--primary-light);
+}
+
+.nav__link--active {
+  border-bottom: .2rem solid var(--primary);
+}
+
+@media (min-width: 45rem) {
+  .nav {
+    background: none;
+    border: none;
+    height: 3.4rem;
+    left: auto;
+    margin-top: 0;
+    position: static;
+    top: auto;
+    width: auto;
+    z-index: 1;
   }
 
-  @media (min-width: $tablet-breakpoint) {
+  .nav-hidden {
+    max-height: 1000px;
+  }
+
+  .nav__link {
     border: none;
     display: inline;
     font-size: 1.8rem;
@@ -84,12 +88,10 @@
     padding: 0 0 .6rem 0;
     width: auto;
   }
-
-  @media (min-width: $large-screen-breakpoint) {
-    margin-left: 4rem;
-  }
 }
 
-.nav__link--active {
-  border-bottom: .2rem solid $primary;
+@media (min-width: 90rem) {
+  .nav__link {
+    margin-left: 4rem;
+  }
 }
